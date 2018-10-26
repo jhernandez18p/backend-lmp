@@ -54,6 +54,7 @@ class Car(models.Model):
         return '%s %s' %( self.model, self.year )
 
     class Meta:
+        ordering = ['brand__name']
         verbose_name = _('Carro')
         verbose_name_plural = _('Carros')
 

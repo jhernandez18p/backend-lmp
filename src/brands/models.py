@@ -16,11 +16,8 @@ def get_upload_path(instance, filename):
     _filename_ext = _filename[-1]
     _filename_name = ''.join(random.choice(_filename[0]) for _ in range(5))
     filename = '%s.%s' % (_filename_name,_filename_ext)
-    # print(filename)
     try:
         a = instance.name.lower()
-        # print('---',instance.__dict__)
-        # print('---',instance.name)
     except:
         a = 'lmp'
     final_path = os.path.join('brand/%s/' % (a.lower()), datetime.now().date().strftime("%Y/%m/%d"), filename)
@@ -51,6 +48,7 @@ class Brand(models.Model):
     name = models.CharField(max_length=140, blank=True)
     slug = models.CharField(max_length=140, blank=True)
     alt = models.CharField(max_length=140, blank=True)
+    count = models.CharField(max_length=140, blank=True)
     img = models.ImageField(
         verbose_name=_('Foto'),
         upload_to=get_upload_path,
@@ -58,10 +56,12 @@ class Brand(models.Model):
         default='/brands/lmp.jpg',
     )
 
+
     def __str__(self):
         return self.name
 
     class Meta:
+        ordering = ['name']
         verbose_name = _('Marca')
         verbose_name_plural = _('Marcas')
 
