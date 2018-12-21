@@ -50,19 +50,19 @@ def site(request):
     #         )
     #         new_position.save()
 
-    info_site = Site.objects.filter(id=1)
-    if info_site.exists():
-        context['info_site'] = info_site[0]
-        sm = SocialMedia.objects.filter(site=info_site[0].id)
-        if sm.exists():
-            context['social_media'] = sm
-    else:
-        info_site = Site(
-            name='Luxury Motors Panamá',
-            description='',
-            url='https://www.luxurymotorspanama.com',
-        )
-        info_site.save()
+    # info_site = Site.objects.filter(id=1)
+    # if info_site.exists():
+    #     context['info_site'] = info_site[0]
+    #     sm = SocialMedia.objects.filter(site=info_site[0].id)
+    #     if sm.exists():
+    #         context['social_media'] = sm
+    # else:
+    #     info_site = Site(
+    #         name='Luxury Motors Panamá',
+    #         description='',
+    #         url='https://www.luxurymotorspanama.com',
+    #     )
+    #     info_site.save()
     
     return context
 
