@@ -20,35 +20,35 @@ def site(request):
     context['SITE_URL'] = 'https://www.luxurymotorspanama.com/'
     context['SITE_LOGO'] = '/static/base/images/logo.png'
 
-    pages = Pages.objects.all()
-    if not pages.exists():
-        new_pages = [
-            {'name':'Inicio','url':'/','have_icon':False},
-            {'name':'¿Quienes somos?','url':'quienes-somos','have_icon':False},
-            {'name':'Inventario','url':'inventario','have_icon':False},
-            {'name':'Contacto','url':reverse('front:contact'),'have_icon':False},
-        ]
-        for object_list in new_pages:
-            new_page = Pages(
-                name=object_list['name'],
-                url=object_list['url'],
-                have_icon=object_list['have_icon']
-            )
-            new_page.save()
+    # pages = Pages.objects.all()
+    # if not pages.exists():
+    #     new_pages = [
+    #         {'name':'Inicio','url':'/','have_icon':False},
+    #         {'name':'¿Quienes somos?','url':'quienes-somos','have_icon':False},
+    #         {'name':'Inventario','url':'inventario','have_icon':False},
+    #         {'name':'Contacto','url':reverse('front:contact'),'have_icon':False},
+    #     ]
+    #     for object_list in new_pages:
+    #         new_page = Pages(
+    #             name=object_list['name'],
+    #             url=object_list['url'],
+    #             have_icon=object_list['have_icon']
+    #         )
+    #         new_page.save()
 
-    positions = Position.objects.all()
-    if not positions.exists():
-        default_positions = [
-            {'name':'header','description':''},
-            {'name':'body','description':''},
-            {'name':'footer','description':''},
-        ]
-        for object_list in default_positions:
-            new_position = Position(
-                name=object_list['name'],
-                description=object_list['description'],
-            )
-            new_position.save()
+    # positions = Position.objects.all()
+    # if not positions.exists():
+    #     default_positions = [
+    #         {'name':'header','description':''},
+    #         {'name':'body','description':''},
+    #         {'name':'footer','description':''},
+    #     ]
+    #     for object_list in default_positions:
+    #         new_position = Position(
+    #             name=object_list['name'],
+    #             description=object_list['description'],
+    #         )
+    #         new_position.save()
 
     info_site = Site.objects.filter(id=1)
     if info_site.exists():
