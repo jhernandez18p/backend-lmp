@@ -1,0 +1,82 @@
+{% load static %}<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% include 'base/tags.html' %}
+    <title>Luxury Motors Panamá {% if title %}- {{title}} {% else %} {% endif %}</title>
+    <style>
+        #menuLogo{height: 35px !important;}
+        .navbar-item.brand-text {font-weight: 300;}
+        .navbar-item, .navbar-link {font-size: 14px;font-weight: 700;}
+        .columns {width: 100%;height: 100%;margin-left: 0;}
+        .menu-label {color: #8F99A3;letter-spacing: 1.3;font-weight: 700;}
+        .menu-list a {color: #0F1D38;font-size: 14px;font-weight: 700;}
+        .menu-list a:hover {background-color: transparent;color: #276cda;}
+        .menu-list a.is-active {background-color: transparent;color: #276cda;font-weight: 700;}
+        .card {box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);margin-bottom: 2rem;}
+        .card-header-title {color: #8F99A3;font-weight: 400;}
+        .info-tiles {margin: 1rem 0;}
+        .info-tiles .subtitle {font-weight: 300;color: #8F99A3;}
+        .hero.welcome.is-info {background: #36D1DC;background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);background: linear-gradient(to right, #5B86E5, #36D1DC);}
+        .hero.welcome .title, .hero.welcome .subtitle {color: hsl(192, 17%, 99%);}
+        .card .content {font-size: 14px;}
+        .card-footer-item {font-size: 14px;font-weight: 700;color: #8F99A3;}
+        .card-footer-item:hover { }
+        .card-table .table {margin-bottom: 0;}
+        .events-card .card-table {max-height: 250px;overflow-y: scroll;}
+    </style>
+    {% block css %}{% endblock %}
+</head>
+<body style="background-color: unset !important; background-image: unset !important; background-image: unset !important; background-image: unset !important;  background-image: unset !important;">
+    {% include 'intra/base/menu.html' %}
+    {% if USER_IS_ACTIVE ==  'INACTIVE' %}
+        <div class="modal is-active">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <section class="modal-card-body">
+                    <div class="card-divider">
+                        <p>Disculpe {{USER_FULLNAME}}.</p>
+                    </div>
+                    <div class="card-section">
+                        <p>Por favor revise en la bandeja de entrada de {{user.email}}, para activar su usuario</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    {% elif USER_IS_ACTIVE == 'BLOCKED' %}
+    <div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <section class="modal-card-body">
+                <div class="card-divider">
+                    <p>Ups... Disculpe {{USER_FULLNAME}} su usuario ha sido bloqueado</p>
+                </div>
+                <div class="card-section">
+                    <p>Por favor contactar al equipo de soporte 
+                        <a href="mailto:luxurymotorspanama@gmail.com" class="has-text-grey">luxurymotorspanama@gmail.com</a>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+    {% else %}
+    <div class="container">
+        <div class="columns">
+            <div class="column is-2 ">
+                {% include 'intra/aside.html' %}
+            </div>
+            <div class="column is-10 is-padding-top-20">
+                <nav class="breadcrumb" aria-label="breadcrumbs">
+                    <ul>
+                        <li><a href="{% url 'intra:home' %}">Intra</a></li>
+                        {% block crumbs %}{% endblock %}
+                    </ul>
+                </nav>                
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% include 'intra/base/footer.html' %}
+    {% include 'intra/base/scripts.html' %}
+</body>
+</html>

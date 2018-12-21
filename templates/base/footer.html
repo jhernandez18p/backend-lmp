@@ -1,0 +1,182 @@
+{% load staticfiles %}
+{% if has_newsletter %}
+<div class="container">
+    <section class="section">
+        <div class="columns">
+            <div class="column">
+                <div>
+                    <figure class="image is-5by4"><img src="{% static 'base/images/cars/carros-07.jpg' %}" alt="Contactenos"></figure>
+                </div>
+            </div>
+            <div class="column">
+                <div class="form-over is-hidden-touch">
+                    <div>
+                        <form method="post" enctype="multipart/form-data" action="{% url 'front:contact' %}">
+                            {% csrf_token %}
+                            <div class="field is-horizontal">
+                                <div class="field-label is-normal"><label class="label">Nombre Completo</label></div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control"><input class="input" type="text" placeholder="John Doe" name="name"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label is-normal"><label class="label">Email</label></div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control"><input class="input" type="text" placeholder="johndoe@email.com" name="email"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label is-normal"><label class="label">Número de teléfono</label></div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control"><input class="input" type="text" placeholder="+507 0000 0000" name="phone"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label">¿Cómo prefiere ser contactado?</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field is-narrow">
+                                        <div class="control">
+                                            <label class="radio"><input type="radio" name="contact">Email</label>
+                                            <label class="radio"><input type="radio" name="contact">teléfono</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label is-normal"><label class="label">Comentarios</label></div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <textarea class="textarea" placeholder="¿Comó te podemos ayudar?" name="message"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label"></div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <button class="button background-red has-text-white">Enviar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <figure class="image is-5by4 is-hidden-tablet-only">
+                        <img src="{% static 'base/images/cars/carros-11.jpg' %}" alt="Formulario de contacto"></img>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endif %}
+<div class="container-fluid has-background-lmpblack">
+    <div class="container">
+        <section class="section">
+            <div class="columns">
+                {% if brand_list_footer %}
+                <div class="column">
+                    <div>
+                        <h3 class="is-size-4 has-text-white">Marcas Destacadas</h3>
+                        <hr class="background-red is-hr-line">
+                    </div>
+                    <ul>
+                        {% for object in brand_list_footer %}
+                        <li class="navbar-item">
+                            <p class="is-size-6">
+                                <a href="{% url 'front:inventory' %}?brand={{object.id}}" class="has-text-light">{{object.name}}</a>
+                            </p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% if top_five_cars %}
+                <div class="column">
+                    <div>
+                        <h3 class="is-size-4 has-text-white">Inventario</h3>
+                        <hr class="background-red is-hr-line">
+                    </div>
+                    <ul>
+                        {% for car in top_five_cars %}
+                        <li class="navbar-item"><a class="has-text-light" href="{{car.get_absolute_url}}">{{car.brand}} - {{car.model}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <div class="column">
+                    <div>
+                        <h3 class="is-size-4 has-text-white">Encuentranos</h3>
+                        <hr class="background-red is-hr-line">
+                    </div>
+                    <div>
+                        <div id="map">
+                            <a class="has-text-light is-centered" href="https://www.google.com.pa/maps/place/Luxury+Motors+Panama/@8.987793,-79.5100239,19.5z/data=!4m5!3m4!1s0x0:0x167b3f19532d83!8m2!3d8.9879867!4d-79.5096606?hl=es&amp;authuser=0" target="_blank" rel="noopener noreferrer">
+                                <picture>
+                                    <img src="{% static 'base/images/map.jpg' %}" alt="Mapa"></img>
+                                </picture>
+                            </a>
+                        </div>
+                        <ul class="is-centered">
+                            <li class="navbar-item">
+                                <p>
+                                    <a href="https://facebook.com/luxurymotorspanama" target="_blank" rel="noopener noreferrer">
+                                        <span class="icon has-text-white is-size-3">
+                                            <i class="fab fa-facebook-square"></i>
+                                        </span>
+                                    </a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="https://instagram.com/luxurymotors.panama" target="_blank" rel="noopener noreferrer">
+                                        <span class="icon has-text-white is-size-3">
+                                            <i class="fab fa-instagram"></i>
+                                        </span>
+                                    </a>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="column">
+                    <div>
+                        <h3 class="is-size-4 has-text-white">Contacto</h3>
+                        <hr class="background-red is-hr-line">
+                    </div>
+                    <ul class="has-text-light">
+                        <li class="navbar-item">
+                            <p class="is-size-6 has-text-light">Email: <span>luxurymotorspanama@gmail.com</span></p>
+                        </li>
+                        <li class="navbar-item">
+                            <p class="is-size-6 has-text-light">Teléfono: <span>229-0628</span></p>
+                        </li>
+                        <li class="navbar-item">
+                            <p class="is-size-6 has-text-light">celular: <span>6618-8330</span></p>
+                        </li>
+                        <li class="navbar-item">
+                            <p class="is-size-6 has-text-light">Dirección: <span>Calle 68 este, San Francisco</span></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="is-copyright">
+        <nav class="navbar is-black">
+            <div class="container is-centered">
+                <div class="navbar-brand">
+                    <p class="navbar-item is-size-7">All Rights Reserved {% now 'Y' %} | Website Designed &amp; Developed by &nbsp;<a href="https://dev2tech.xyz"> Dev2tech</a>.</p>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

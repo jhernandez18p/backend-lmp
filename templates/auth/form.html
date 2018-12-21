@@ -1,0 +1,48 @@
+{% extends 'auth/base/index.html' %}{% load staticfiles %}{% load widget_tweaks %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+<form method="post" id="auth-form">
+    {% csrf_token %} 
+    {% for field in form %}
+        <div class="md-form">
+            {{ field.label_tag | safe }}
+            {% if form.is_bound %}
+                {% if field.errors %}
+                    {% render_field field class="form-control is-valid" %}
+                    {% for error in field.errorss %}
+                        <div class="invalid-feedback">
+                            {{ error |safe }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field field class="form-control is-valid" %}
+                {% endif %}
+            {% else %}
+                {% render_field field class="form-control" %}
+            {% endif %} 
+            {% if field.help_texts %}
+            <small class="form-text text-muted">
+                {{ field.help_text | safe}}
+            </small>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <div class="text-center">
+        <button class="btn btn-primary g-recaptcha"
+            data-sitekey="6LfVkVQUAAAAANXxvWC0gEyxTctYXtw06_pWsH9M"
+            data-callback="onSubmit">
+            {{form_button}}
+        </button>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block js %}
+<script>function onSubmit(token) {document.getElementById("auth-form").submit();}</script>
+{% endblock %}

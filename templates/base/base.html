@@ -1,0 +1,21 @@
+{% load static %}<!DOCTYPE html>
+<html lang="es" >
+<head>
+    {% include 'base/tags.html' %}
+    <title>Luxury Motors Panamá {% if title %}- {{title}} {% else %}{% endif %}</title>
+    {% block css %}{% endblock %}
+</head>
+<body>
+    <header style="margin-bottom:50px">
+        {% include 'base/menu.html' %}
+    </header>
+    <section id="bodySection">
+        {% block content %}{% endblock %}
+    </section>
+    <footer style="margin-top:50px">
+        {% include 'base/footer.html' %}
+    </footer>
+    {% include 'base/scripts.html' %}
+    {% block js %}{% endblock %}
+</body>
+</html>

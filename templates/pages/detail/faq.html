@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}{% load staticfiles %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+<div class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-content has-background-grey is-padding-30 is-paddingless-top">
+        <h3 class="has-text-white is-centered is-size-3 is-margin-top-20" >Preguntas frecuentes</h3>
+        <div class="accordions">
+            <button class="accordion">¿Hacen Trade-in?</button>
+            <div class="panel">
+                <p>Si, es proceso está sujero a una evaluacion previa. Para mayor información puede llamarnos a nuestros números de contacto.</p>
+            </div>
+        </div>
+    </div>
+    <button class="modal-close is-large background-red" aria-label="close" id="modalClose"></button>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function(){
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        };
+
+        $(document).on('click','#modalClose', function(){
+            var next = window.location.search.substring(1).split('next=')[1] || '/';
+            window.location = next;
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'base/js/jquery-1.11.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'base/js/jquery-migrate-1.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'base/js/slick.min.js' %}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#mainMenu").click(function () {
+            $(".navbar-burger").toggleClass("is-active");
+            $(".navbar-menu").toggleClass("active is-active");
+        });
+        
+        $('#brandCarousel').slick({
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 3500,
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            arrows: true,
+        });
+
+        $('#siteHeaderCarousel').slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            arrows: true,
+            fade: true
+        });
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-83370429-9');
+    });
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-83370429-9"></script>

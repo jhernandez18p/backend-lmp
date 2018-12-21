@@ -28,10 +28,10 @@ from rest_framework.views import APIView
 
 from .forms import SignUpForm,NewsletterForm
 from .models import Newsletter
-from src.user.models import Profile
-from src.user.tokens import account_activation_token
-from src.utils.libs import newsletter_email, reCAPTCHA
-from app.serializers.serializers import UserSerializer, UserSerializerWithToken
+from src.users.models import Profile
+from src.users.tokens import account_activation_token
+from src.users.utils.libs import newsletter_email, reCAPTCHA
+from src.api.serializers import UserSerializer
 
 class ActivateAccountView(View):
     def get(self, request, uidb64, token):
@@ -266,7 +266,7 @@ class UserList(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request, format=None):
-        serializer = UserSerializerWithToken(data=request.data)
+        serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -1,0 +1,103 @@
+{% extends 'base/base.html' %}{% load staticfiles %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+<div class="modal is-active">
+<div class="modal-background"></div>
+<div class="modal-content is-padding-30 is-paddingless-top">
+    <div class="modal-card-head">
+        <h3 class="has-text-black is-centered is-size-3">
+            Contacto
+        </h3>
+    </div>
+    <form method="post" enctype="multipart/form-data" action="{% url 'front:contact' %}">
+        <div class="modal-card-body">
+            {% csrf_token %}
+            <input class="input" type="hidden" name="brand" value="{{brand}}" >
+            <input class="input" type="hidden" name="model" value="{{model}}" >
+            <div class="field is-horizontal">
+                <div class="field-label is-normal"><label class="label">Nombre Completo</label></div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control"><input class="input" type="text" placeholder="John Doe" name="name"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal"><label class="label">Email</label></div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control"><input class="input" type="text" placeholder="johndoe@email.com" name="email"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal"><label class="label">Número de teléfono</label></div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control"><input class="input" type="text" placeholder="+507 0000 0000" name="phone"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">¿Cómo prefiere ser contactado?</label>
+                </div>
+                <div class="field-body">
+                    <div class="field is-narrow">
+                        <div class="control">
+                            <label class="radio"><input type="radio" name="contact">Email</label>
+                            <label class="radio"><input type="radio" name="contact">teléfono</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal"><label class="label">Comentarios</label></div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <textarea class="textarea" placeholder="¿Comó te podemos ayudar?" name="message"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-card-foot">
+            <button class="button is-primary is-fullwidth">Enviar Cotización</button>
+        </div>
+    </form>
+</div>
+<button class="modal-close is-large background-red" aria-label="close" id="modalClose"></button>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function () {
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        };
+
+
+        $(document).on('click', '#modalClose', function () {
+            var next = window.location.search.substring(1).split('next=')[1] || '/';
+            window.location = next;
+        });
+    });
+</script>
+{% endblock %}

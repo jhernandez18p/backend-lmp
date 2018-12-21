@@ -1,0 +1,16 @@
+{% extends 'app/base/index.html' %}{% load staticfiles %}{% load widget_tweaks %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<div class="container is-padding-top-30">
+    <div class="has-text-center">
+        <h1>Pagina de error {{error_code}}</h1>
+        <p>No pudo ser encontrada la página: {{ request.path }}</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

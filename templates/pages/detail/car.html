@@ -1,0 +1,176 @@
+{% extends 'base/base.html' %}{% load staticfiles %}{% load humanize %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="columns">
+        <div class="column is-12">
+            <div class="car-detail-carousel">
+                <div class="slider-for">
+                    {% for img in img_list %}
+                        <div>
+                            <img src="{{img.img.url}}" alt="{{object.brand}}">
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="slider-nav">
+                    {% for img in img_list %}
+                        <div>
+                            <img src="{{img.img.url}}" alt="{{object.brand}}">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <div class="has-background-black-ter has-text-white">
+                <div>
+                    <div class="is-padding-y-10">
+                        <div class="has-text-left">
+                            <p class="is-size-3 has-text-weight-bold">{{object.brand}} {{object.model}} - {{object.year}}</p>
+                        </div>
+                        <div class="has-text-right" id="price">
+                            <p class="is-size-4 has-text-weight-bold">
+                                {% if object.price == None %}
+                                $0,00
+                                {% elif object.price != '' %}
+                                ${{object.price|floatformat:2|intcomma}}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>    
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <div class="is-padding-y-10">
+                            {% if object.brand %}
+                            <h3 class="is-size-5">Marca</h3>
+                            <p class="has-text-grey-light">{{object.brand}}</p>
+                            {% endif %}
+                            {% if object.model %}
+                            <h3 class="is-size-5">Modelo</h3>
+                            <p class="has-text-grey-light">{{object.model}}</p>
+                            {% endif %}
+                            {% if object.milage %}
+                            <h3 class="is-size-5">Recorrido</h3>
+                            <p class="has-text-grey-light">{{object.milage}}</p>
+                            {% endif %}
+                            {% if object.direction %}
+                            <h3 class="is-size-5">Dirección</h3>
+                            <p class="has-text-grey-light">{{object.direction}}</p>
+                            {% endif %}
+                            {% if object.sub_type %}
+                            <h3 class="is-size-5">Subtipo</h3>
+                            <p class="has-text-grey-light">{{object.sub_type}}</p>
+                            {% endif %}
+                            {% if object.traction %}
+                            <h3 class="is-size-5">Tracción</h3>
+                            <p class="has-text-grey-light">{{object.traction}}</p>
+                            {% endif %}
+                            {% if object.transmision %}
+                            <h3 class="is-size-5">Transmisión</h3>
+                            <p class="has-text-grey-light">{{object.transmision}}</p>
+                            {% endif %}
+                        </div>    
+                    </div>
+                    <div class="column">
+                        <div class="is-padding-y-10">
+                            {% if object.color %}
+                            <h3 class="is-size-5">Color</h3>
+                            <p class="has-text-grey-light">{{object.color}}</p>
+                            {% endif %}
+                            {% if object.fuel %}
+                            <h3 class="is-size-5">Combustible</h3>
+                            <p class="has-text-grey-light">{{object.fuel}}</p>
+                            {% endif %}
+                            <h3 class="is-size-5">Sistema de climatización</h3>
+                            <p class="has-text-grey-light">Aire Acondicionado</p>
+                            {% if object.engine %}
+                            <h3 class="is-size-5">Motor (cilindraje)</h3>
+                            <p class="has-text-grey-light">{{object.engine}}</p>
+                            {% endif %}
+                            {% if object.engine %}
+                            <h3 class="is-size-5">Tipo de motor</h3>
+                            <p class="has-text-grey-light">{{object.engine}}</p>
+                            {% endif %}
+                            {% if object.description %}
+                            <h3 class="is-size-5">Descripciones</h3>
+                            <p class="has-text-grey-light">{{object.description | safe}}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <a class="button is-normal background-red has-text-white is-fullwidth" href="{% url 'front:contact-quote' %}?brand={{object.brand}}&model={{object.model}}&year={{object.year}}&next={{request.path}}">Cotizar {{object.brand}} {{object.model}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if object_list %}
+    <div class="hero">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h2 class="title has-text-white is-uppercase">Tambien en el inventario</h2>
+            </div>
+        </div>
+    </div>
+    <div class="columns is-centered">
+        {% for object in object_list %}
+        <div class="column is-3">
+            <div>
+                <a href="{{object.get_absolute_url}}">
+                    <div class="img-container is-radius is-inventory">
+                        <figure class="image is-5by3">
+                            {% if object.img.url != None %}
+                            <img src="{{object.img.url}}" alt="Ford">
+                            {% else %}
+                            <img src="{% static 'base/images/cars/ford/explorer-XLT-2016/01.jpg' %}" alt="Ford">
+                            {% endif %}
+                        </figure>
+                        <div class="img-text-overlay">
+                            <div class="text">
+                                <h3 class="is-size-4">{{object.model}}</h3>
+                                <p class="">{{object.brand}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function (){
+        
+        $('.slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            fade: true,
+            asNavFor: '.slider-nav'
+        });
+
+        $('.slider-nav').slick({
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 2500,
+            asNavFor: '.slider-for',
+            arrows: true,
+            focusOnSelect: true
+        });
+        
+    });
+</script>
+{% endblock %}

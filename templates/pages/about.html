@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+    <div class="columns">
+        <div class="column ">
+            <div>
+                <div class="img-container is-radius is-inventory">
+                    <figure class="image">
+                        {% if object.img.url != None %}
+                        <img src="{{object.img.url}}" alt="Ford">
+                        {% else %}
+                        <img src="{% static 'base/images/about.jpg' %}" alt="Contactenos">
+                        {% endif %}
+                    </figure>
+                    <div class="img-text-overlay-active">
+                        <div class="text">
+                            <h3 class="is-size-2 is-size-5-touch">Luxury Motors Panamá</h3>
+                            <p class="is-size-5 is-size-7-touch has-text-grey-light">Con mas de 20 años en el mercado de autos de lujos, somos pioneros en la ciudad de Panamá y contamos con amplia experiencia en el area.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h2 class="title has-text-white is-uppercase">Galeria</h2>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column" id="siteHeaderCarousel">
+        {% for object in carousel_image_list %}
+            <div>
+                <img src="{{object.image.url}}" alt="Carousel home {{object.id}}">
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

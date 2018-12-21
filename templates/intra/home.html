@@ -1,0 +1,82 @@
+{% extends 'intra/base/base.html' %}{% load staticfiles %}
+
+{% block css %}
+<style>
+</style>
+{% endblock %}
+
+{% block crumbs %}
+<li class="has-text-back"><a href="#" aria-current="page">Inicio</a></li>
+{% endblock %}
+
+
+{% block content %}
+        <div class="hero is-info welcome is-small is-margin-botton-50">
+            <div class="hero-body">
+                <div class="">
+                    <h1 class="title">
+                        Hola, {{USER_FULLNAME}}.
+                    </h1>
+                    <h2 class="subtitle">
+                        Bienvenido a la Intranet
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-tiles">
+            <div class="tile is-ancestor has-text-centered">
+                <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <p class="title">{{users_len}}</p>
+                        <p class="subtitle">Usuarios</p>
+                    </article>
+                </div>
+                <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <p class="title">{{products_len}}</p>
+                        <p class="subtitle">Products</p>
+                    </article>
+                </div>
+                <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <p class="title">{{post_len}}</p>
+                        <p class="subtitle">Publicaciones</p>
+                    </article>
+                </div>
+                <!-- <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <p class="title">19</p>
+                        <p class="subtitle">Exceptions</p>
+                    </article>
+                </div> -->
+            </div>
+        </div>
+    
+    {% if posts %}
+    <div class="">
+        <div class="columns">
+                <div class="column is-12">
+                    <div class="carousel" id="intraHomeCarousel">
+                        {% for object in posts %}
+                        <div>
+                            {% if object.img.url != None %}
+                            <img class="is-background" src="{{object.img.url}}" alt="{{object.name}}"></img>
+                            {% else %}
+                            <img class="is-background" src="/static/base/img/img-base-m.png" alt="{{object.name}}"></img>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+{% endblock %}
+
+{% block js %}
+<script>
+
+</script>
+{% endblock %}

@@ -1,0 +1,29 @@
+
+<nav class="navbar is-white">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item brand-text is-uppercase" href="{% url 'intra:home' %}">
+                Intra
+            </a>
+            <div class="navbar-burger burger" data-target="navMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div id="navMenu" class="navbar-menu">
+            <div class="navbar-start">
+                <div class="navbar-item">
+                </div>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <a href="{% url 'auth:logout' %}?next=/" class="navbar-item">
+                        <strong>Salir</strong>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -14,17 +14,17 @@ urlpatterns = [
     path('login/', custom_login, name='login'),
     path('salir/', custom_logout, name='logout'),
     path('registro/', custom_register, name='register'),
-    path('password_reset/done/', auth_views.password_reset_done, 
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), 
         name='password_reset_done'
     ),
-    path('password_reset_complete/done/', auth_views.password_reset_complete, 
+    path('password_reset_complete/done/', auth_views.PasswordResetCompleteView.as_view(), 
         name='password_reset_complete'
     ),
-    path('password_reset/', auth_views.password_reset, {
+    path('password_reset/', auth_views.PasswordResetView.as_view(), {
         'post_reset_redirect':'auth:password_reset_done',}, name='password_reset'
     ),
     re_path(r'^password_reset_confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        auth_views.password_reset_confirm, 
+        auth_views.PasswordResetConfirmView.as_view(), 
         {
             'post_reset_redirect':'auth:password_reset_complete'
         },
@@ -40,5 +40,4 @@ urlpatterns = [
     # JWT
     path('current_user/', current_user),
     path('users/', UserList.as_view()),
-    
 ]

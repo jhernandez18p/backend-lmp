@@ -1,0 +1,72 @@
+{% load staticfiles %}
+
+<aside class="menu is-hidden-mobile is-padding-top-30">
+    {% if user.is_staff %}
+    <p class="menu-label">Configuración</p>
+    <ul class="menu-list">
+        <li><a href="{# url 'intra:home' #}" class="{% if menu == 'home' %}is-active{% endif %}"><span class="">Inicio</span></a></li>
+        <li><a href="{# url 'intra:conf' #}" class="{% if menu == 'conf' %}is-active{% endif %}"><span class="">Sitio</span></a>
+            <ul>
+                <li><a href="{# url 'intra:conf-pages' #}" class="{% if menu == 'conf-pages' %}is-active{% endif %}"><span class="">Paginas</span></a></li>
+                <li><a href="{# url 'intra:conf-slides' #}" class="{% if menu == 'conf-slides' %}is-active{% endif %}"><span class="">Carruseles</span></a></li>
+                <li><a href="{# url 'intra:conf-faqs' #}" class="{% if menu == 'conf-faqs' %}is-active{% endif %}"><span class="">Preguntas Frecuentes</span></a></li>
+                <li><a href="{# url 'intra:conf-newsletters' #}" class="{% if menu == 'conf-newsletters' %}is-active{% endif %}"><span class="">Boletín Informativos</span></a></li>
+            </ul>
+        </li>
+    </ul>
+    {% endif %}
+    <p class="menu-label">Usuarios</p>
+    <ul class="menu-list">
+        {% if user.is_staff %}
+        <li><a href="{# url 'intra:users' #}" class="{% if menu == 'users' %}is-active{% endif %}"><span class="">Todos</span></a></li>
+        {% endif %}
+        <li><a href="{# url 'intra:profile' #}" class="{% if menu == 'profile' %}is-active{% endif %}"><span class="">Mi Perfil</span></a></li>
+    </ul>
+    <p class="menu-label">Servicios</p>
+    <ul class="menu-list">
+        <li><a href="{# url 'intra:services' #}" class="{% if menu == 'services' %}is-active{% endif %}" class="{% if menu == 'services' %}is-active{% endif %}"><span class="">Todos</span></a></li>
+    </ul>
+    <p class="menu-label">Productos</p>
+    <ul class="menu-list">
+        <li>
+            <a href="{# url 'intra:products' #}" class="{% if menu == 'products' %}is-active{% endif %}"><span class="">Todos</span></a>
+            {% if user.is_staff %}
+                <ul>
+                    <li><a href="{# url 'intra:products-brands' #}" class="{% if menu == 'brands' %}is-active{% endif %}"><span class="">Marcas</span></a></li>
+                    <li><a href="{# url 'intra:products-categories' #}" class="{% if menu == 'categories' %}is-active{% endif %}"><span class="">Categorías</span></a></li>
+                    <li><a href="{# url 'intra:products-departments' #}" class="{% if menu == 'departments' %}is-active{% endif %}"><span class="">Departamentos</span></a></li>
+                </ul>
+            {% endif %}
+        </li>
+        <li><a href="{# url 'intra:products-top' #}" class="{% if menu == 'top-products' %}is-active{% endif %}"><span class="">Top 10</span></a></li>
+        
+    </ul>
+</aside>
+
+{% block css %}
+<style>
+    .blue{background-color: #1e90ff !important;color: #fff;border:1px #1e90ff;}
+    .green{background-color: #2ed573 !important;color: #fff;border:1px #2ed573;}
+    .green2{background-color: #7bed9f !important;color: #fff;border:1px #7bed9f;}
+    .golden{background-color: #eccc68 !important;color: #fff;border:1px #eccc68;}
+    .menu-label {
+        color: #8F99A3;
+        letter-spacing: 1.3;
+        font-weight: 700;
+    }
+    .menu-list a {
+        color: #0F1D38;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    .menu-list a:hover {
+        background-color: transparent;
+        color: #276cda;
+    }
+    .menu-list a.is-active {
+        background-color: transparent;
+        color: #276cda;
+        font-weight: 700;
+    }
+    </style>
+{% endblock %}

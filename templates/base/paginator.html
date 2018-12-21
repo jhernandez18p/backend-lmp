@@ -1,0 +1,31 @@
+{% if is_paginated %}
+    <div>
+        <nav class="pagination is-centered is-rounded is-small" role="navigation" aria-label="pagination">
+            {% if page_obj.has_previous %}
+                <a class="pagination-previous has-background-white" href="?page={{ page_obj.previous_page_number }}{% if url_arg %}{{ url_arg }}{% endif %}">Anterior</a>
+            {% else %}
+                <a class="pagination-previous has-background-white" disabled>Anterior</a>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <a class="pagination-next has-background-white" href="?page={{ page_obj.next_page_number }}{% if url_arg %}{{ url_arg }}{% endif %}">Siguiente</a>
+            {% else %}
+                <a class="pagination-next has-background-white" disabled>Siguiente</a>
+            {% endif %}
+            <ul class="pagination-list">
+                {% if page_obj.paginator.num_pages > page_obj.number|add:'-2' and page_obj.number|add:'-2' > 0 %}
+                    <li><a href="?page={{ page_obj.number|add:'-2' }}{% if url_arg %}{{ url_arg }}{% endif %}"><span class="pagination-ellipsis">&hellip;</span></a></li>
+                {% endif %}
+                {% for i in paginator.page_range %} 
+                    {% if page_obj.number == i %}
+                        <li><a class="pagination-link background-red has-text-white" aria-label="Page {{i}}{% if url_arg %}{{ url_arg }}{% endif %}" aria-current="page">{{ i }}</a></li>
+                    {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+                        <li><a class="pagination-link has-background-white" aria-label="page {{i}}" href="?page={{ i }}{% if url_arg %}{{ url_arg }}{% endif %}">{{i}}</a></li>
+                    {% endif %}
+                {% endfor %} 
+                {% if page_obj.paginator.num_pages > page_obj.number|add:'2' %}
+                    <li><a href="?page={{ page_obj.number|add:'3' }}{% if url_arg %}{{ url_arg }}{% endif %}"><span class="pagination-ellipsis">&hellip;</span></a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+{% endif %}

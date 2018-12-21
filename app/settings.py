@@ -1,39 +1,60 @@
 import os
 from decouple import config
 from django.contrib.messages import constants as message_constants
-from django.contrib.messages import constants as messages
 
 SITE_ID = 1
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 SECRET_KEY = config('SECRET_KEY')
-
 DEBUG = config('DEBUG', cast=bool)
+ROOT_URLCONF = 'app.urls'
+WSGI_APPLICATION = 'app.wsgi.application'
+LANGUAGE_CODE = 'es-PA'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR), 'media')
+STATIC_URL = '/static/'
+if config('STATIC_ROOT', cast=bool) == True:
+    STATIC_ROOT = os.path.abspath(os.path.join(os.path.join(BASE_DIR), 'staticfiles'))
+else:
+    STATICFILES_DIRS = (os.path.abspath(os.path.join(os.path.join(BASE_DIR), 'staticfiles')),)
+
+MESSAGE_TAGS = {
+    message_constants.DEBUG: 'info',
+    message_constants.INFO: 'info',
+    message_constants.SUCCESS: 'success',
+    message_constants.WARNING: 'warning',
+    message_constants.ERROR: 'danger',
+}
 
 if DEBUG:
     # DEBUG = True
     ALLOWED_HOSTS = ['*']
     CORS_ORIGIN_ALLOW_ALL = True
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     MESSAGE_LEVEL = message_constants.DEBUG
+
 else:
     # DEBUG = False
-    ALLOWED_HOSTS = ['localhost:*','luxurymotorspanama.com']
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = config('EMAIL_HOST')
-    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-    EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-    EMAIL_PORT = config('EMAIL_PORT')
-    EMAIL_USE_SSL = config('EMAIL_USE_SSL',cast=bool)
-    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-    EMAIL_TO_USER = EMAIL_HOST_USER
+    ALLOWED_HOSTS = ['*']
     
     CORS_ORIGIN_WHITELIST = (
         'localhost:9000',
         'localhost:3000',
     )
     MESSAGE_LEVEL = message_constants.INFO
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_TO_USER = EMAIL_HOST_USER
 
 DJANGO_APPS = [
     'django.contrib.auth',
@@ -51,6 +72,7 @@ DJANGO_APPS = [
 
 LOCAL_APPS = [
     'src.api',
+    'src.base',
     'src.brands',
     'src.cars',
     'src.medias',
@@ -65,6 +87,7 @@ THIRD_PARTY_APPS = [
     'rest_framework.authtoken',
     'rest_framework',
     'social_django',
+    'widget_tweaks',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -80,12 +103,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,12 +117,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.custom_context_processors.brands',
+                'app.custom_context_processors.top_cars',
+                'app.custom_context_processors.site',
             ],
         },
     },
 ]
-
-WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
@@ -110,7 +135,6 @@ DATABASES = {
         'HOST': config('DB_HOST'),
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -127,33 +151,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-LANGUAGE_CODE = 'es-PA'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR), 'media')
-
-STATIC_URL = '/static/'
-
-if config('STATIC_ROOT', cast=bool) == True:
-    STATIC_ROOT = os.path.abspath(os.path.join(os.path.join(BASE_DIR), 'staticfiles'))
-    # print('STATIC_ROOT')
-else:
-    STATICFILES_DIRS = (os.path.abspath(os.path.join(os.path.join(BASE_DIR), 'staticfiles')),)
-    # print('staticfiles')
-
-
 AUTHENTICATION_BACKENDS = [
-#     'social_core.backends.github.GithubOAuth2',
-#     'social_core.backends.twitter.TwitterOAuth',
-#     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     'app.EmailBackend.EmailBackend',
 ]
@@ -174,10 +172,7 @@ REST_FRAMEWORK = {
 #     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 20,
-    # 'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
-    'DEFAULT_FILTER_BACKENDS': (
-        'django_filters.rest_framework.DjangoFilterBackend',
-    )
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
 
 
@@ -185,12 +180,16 @@ JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'src.users.tokens.my_jwt_response_handler'
 }
 
-MESSAGE_TAGS = {
-    messages.DEBUG: 'info',
-    messages.INFO: 'info',
-    messages.SUCCESS: 'success',
-    messages.WARNING: 'warning',
-    messages.ERROR: 'danger',
-}
-
 IMPORT_EXPORT_USE_TRANSACTIONS = True
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source']
+        ]
+    }
+}
+GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_SECRET_KEY')

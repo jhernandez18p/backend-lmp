@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+    <section class="section">
+        <div class="columns">
+            <div class="column">
+                <div class="">
+                    <a href="{% url 'front:contact-f-a-q' %}?next={{request.path}}">
+                        <figure class="image is-5by4">
+                            <img src="{% static 'base/images/cars/faq.jpg' %}" alt="Contactenos"></img>
+                        </figure>
+                    </a>
+                </div>
+            </div>
+            <div class="column">
+                <figure class="image is-5by4">
+                    <a href="{% url 'front:contact-book' %}?next={{request.path}}">
+                        <img src="{% static 'base/images/cars/book.jpg' %}" alt="Formulario de contacto"></img>
+                    </a>
+                </figure>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

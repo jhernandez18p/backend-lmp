@@ -48,14 +48,18 @@ class Brand(models.Model):
     name = models.CharField(max_length=140, blank=True)
     slug = models.CharField(max_length=140, blank=True)
     alt = models.CharField(max_length=140, blank=True)
-    count = models.CharField(max_length=140, blank=True)
+    count = models.PositiveSmallIntegerField(default=0)
     img = models.ImageField(
         verbose_name=_('Foto'),
         upload_to=get_upload_path,
         blank=True,
         default='/brands/lmp.jpg',
     )
+    is_active = models.BooleanField(default=False)
 
+    def update_count(self):
+        self.count = Car.objects.all().filter(brand=self.id).count()
+        self.save()
 
     def __str__(self):
         return self.name

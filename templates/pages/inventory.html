@@ -1,0 +1,263 @@
+{% extends 'base/base.html' %}{% load staticfiles %}{% load humanize %}
+
+{% block content %}
+
+<div class="container" id="inventory">
+    <div class="columns">
+        <div class="column is-3 is-hidden-touch">
+            <div id="searchBox">
+                <div id="productsSearcher">
+                    <div class="card box-animation">
+                        <div class="formFilters">
+                            <div class="has-background-grey has-text-centered is-padding-y-10">
+                                <h3 class="is-size-5 has-text-white is-marginless">Busqueda avanzada</h3>
+                            </div>
+                            <div class="has-background-grey-lighter is-padding-y-10">
+                                <h3 class="is-size-6 is-marginless">Vehículo por nombre</h3>
+                                <div class="field has-addons">
+                                    <div class="control has-background-white is-marginless">
+                                        {% if search == '' %}
+                                            <input class="input" type="text" placeholder="Buscar un producto" id='searchInput'></input>
+                                        {% else %}
+                                            <input class="input" type="text" placeholder="{{search}}" value="{{search}}" id='searchInput'></input>
+                                        {% endif %}
+                                    </div>
+                                    <div class="control is-marginless">
+                                        <a class="button is-info">
+                                            <span class="icon has-text-white tooltip is-tooltip-right" data-tooltip="Buscar">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="has-background-grey-lighter is-padding-y-10">
+                                <h3 class="is-size-6 is-marginless">Precio</h3>
+                                <div class="field has-addons has-text-centered">
+                                    <div class="field">
+                                        <form>
+                                            {# csrf_token #}
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <p class="control is-expanded has-icons-left">
+                                                        {% if price_lower == '' or price_lower == None %}
+                                                        <input class="input" type="text" placeholder="$0,00" id='priceLowerInput'>
+                                                        {% else %}
+                                                        <input class="input" type="text" placeholder="${{price_lower|floatformat:2|intcomma}}" value="{{price_lower}}" id='priceLowerInput'>
+                                                        {% endif %}
+                                                        <span class="icon is-small is-left">
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div class="field">
+                                                    <p class="control is-expanded has-icons-left has-icons-right">
+                                                        {% if price_higher == '' %}
+                                                        <input class="input" type="email" placeholder="${{price_higher|floatformat:2|intcomma}}" id='priceHigherInput'>
+                                                        {% else %}
+                                                        <input class="input" type="email" placeholder="${{price_higher|floatformat:2|intcomma}}" value="{{price_higherprice_higher|floatformat:2|intcomma}}" id='priceHigherInput'>
+                                                        {% endif %}
+                                                        <span class="icon is-small is-left">
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="has-background-grey-lighter is-padding-y-10">
+                                <h3 class="is-size-6 is-marginless">Año</h3>
+                                <div class="field has-addons has-text-centered">
+                                    <div class="field">
+                                        <form>
+                                            {# csrf_token #}
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <p class="control is-expanded has-icons-left">
+                                                        {% if year_lower == '' or year_lower == None %}
+                                                        <input class="input" type="text" placeholder="1920" id="yearLowerInput">
+                                                        {% else %}
+                                                        <input class="input" type="text" placeholder="{{year_lower}}" value="{{year_lower}}" id="yearLowerInput">
+                                                        {% endif %}
+                                                        <span class="icon is-small is-left">
+                                                            <i class="far fa-calendar-alt"></i>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div class="field">
+                                                    <p class="control is-expanded has-icons-left has-icons-right">
+                                                        {% if year_higher == '' %}
+                                                        <input class="input" type="email" placeholder="{% now 'Y' %}" id="yearHigherInput">
+                                                        {% else %}
+                                                        <input class="input" type="email" placeholder="{{year_higher}}" value="{{year_higher}}" id="yearHigherInput">
+                                                        {% endif %}
+                                                        <span class="icon is-small is-left">
+                                                            <i class="far fa-calendar-alt"></i>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="has-background-grey-lighter is-padding-y-10">
+                                <h3 class="is-size-6 is-marginless">Marcas</h3>
+                                <div class="field has-addons has-text-centered">
+                                    <div class="select">
+                                        <form>
+                                            {% csrf_token %}
+                                            <select id="brandSelector">
+                                                {% if brand != '' %}
+                                                <option selected>{{ brand | lower | capfirst}}</option>
+                                                {% else %}
+                                                <option selected>Marcas</option>
+                                                {% endif %}
+                                                {% for obj in brand_list %}
+                                                <option value="{{obj.id}}">{{ obj.name | lower | capfirst }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="has-background-grey-lighter is-padding-y-10 is-padding-x-10">
+                                <a class="button is-normal background-red has-text-white is-fullwidth">Buscar</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column is-three-quarters">
+            <div class="">
+                <div class="column is-padding-top-30" id="feeds">
+                    <div class="columns">
+                        {% for object in object_list %}
+                            {% if forloop.counter0 == 3 or forloop.counter0 == 6 or forloop.counter0 == 9 or forloop.counter0 == 12 %}
+                                </div><div class="columns">
+                            {% endif %}
+                        <div class="column is-4">
+                            <div>
+                                <a href="{{object.get_absolute_url}}">
+                                    <div class="img-container is-radius is-inventory">
+                                        <figure class="image is-5by3">
+                                            {% if object.img.url != None %}
+                                            <img src="{{object.img.url}}" alt="Ford">
+                                            {% else %}
+                                            <img src="{% static 'base/images/cars/ford/explorer-XLT-2016/01.jpg' %}" alt="Ford">
+                                            {% endif %}
+                                        </figure>
+                                        <div class="img-text-overlay">
+                                            <div class="text">
+                                                <h3 class="is-size-4">{{object.model}}</h3>
+                                                <p class="">{{object.brand}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="column is-4">
+                            <div>
+                                <a href="{% url 'front:inventory' %}">
+                                    <div class="img-container is-radius is-inventory has-background-black">
+                                        <figure class="image is-5by3">
+                                            <img src="{%  static 'base/images/logo.png' %}" alt="Luxury Motors Panamá">
+                                        </figure>
+                                        <div class="img-text-overlay-active">
+                                            <div class="text">
+                                                <p class="is-size-6  is-size-7-touch has-text-grey-light">No se han encontrado resultados</p>
+                                                <p class="is-size-6  is-size-7-touch has-text-white">Ver todos</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-8 is-offset-2">
+            {% include 'base/paginator.html' %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block js %}
+<script>
+    var baseUrl = '{{url_arg | safe}}';
+    $(document).ready(function(){
+
+        function newLocation(newUrl){
+            let url;
+            if (baseUrl === '&'){
+                url = ('?' + newUrl);
+            }else{
+                url = ('?' + baseUrl + newUrl);
+            }
+            window.location = url;
+        };
+
+        $(document).on('change','#yearLowerInput', function(){
+            newLocation('page=1&year_lower='+this.value+'');
+        });
+        $(document).on('change','#yearHigherInput', function(){
+            console.log('click');
+            newLocation('page=1&year_higher='+this.value+'');
+        });
+        $(document).on('change','#priceLowerInput', function(){
+            newLocation('page=1&price_lower='+this.value+'');
+        });
+        $(document).on('change','#priceHigherInput', function(){
+            newLocation('page=1&price_higher='+this.value+'');
+        });
+        $(document).on('change','#brandSelector', function(){
+            newLocation('page=1&brand='+this.value+'');
+        });
+        $(document).on('change','#searchInput', function(){
+            newLocation('page=1&search='+this.value+'');
+        });
+
+        $('#lineDelete').on('click', function(){
+            newLocation('page=1&line=');
+        });
+        $('#sub_lineDelete').on('click', function(){
+            newLocation('page=1&sub_line=');
+        });
+        $('#categoryDelete').on('click', function(){
+            newLocation('page=1&category=');
+        });
+        $('#departmentDelete').on('click', function(){
+            newLocation('page=1&department=');
+        });
+        $('#brandDelete').on('click', function(){
+            newLocation('page=1&brand=');
+        });
+        $('#colorDelete').on('click', function(){
+            newLocation('page=1&color=');
+        });
+        $('#searchDelete').on('click', function(){
+            newLocation('page=1&search=');
+        });
+
+        $('#productsSearchButton').on('click', function(){
+            $('#productsSearcherMov').css('display','block')
+        });
+        $('#searchBoxClose').on('click', function(){
+            $('#productsSearcherMov').css('display','none')
+        });
+
+    });
+
+</script>
+{% endblock %}
