@@ -9,13 +9,19 @@
         <div class="column is-12">
             <div class="car-detail-carousel">
                 <div class="slider-for">
+                    <div>
+                        <img src="{{object.img.url}}" alt="{{object.model}}">
+                    </div>
                     {% for img in img_list %}
-                        <div>
-                            <img src="{{img.img.url}}" alt="{{object.brand}}">
-                        </div>
+                    <div>
+                        <img src="{{img.img.url}}" alt="{{object.brand}}">
+                    </div>
                     {% endfor %}
                 </div>
                 <div class="slider-nav">
+                    <div>
+                        <img src="{{object.img.url}}" alt="{{object.model}}">
+                    </div>
                     {% for img in img_list %}
                         <div>
                             <img src="{{img.img.url}}" alt="{{object.brand}}">
