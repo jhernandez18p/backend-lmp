@@ -28,7 +28,7 @@ class Home(ListView):
             home_page = Pages.objects.get(name='Inicio')
 
             try:
-                header_position = Position.objects.get(name='Header')
+                header_position = Position.objects.get(name='header')
 
                 try:
                     carousel = Carousel.objects.get(page__name=home_page.name, position__name=header_position.name)
@@ -73,7 +73,7 @@ class About(ListView):
             home_page = Pages.objects.get(name='¿Quienes somos?')
 
             try:
-                header_position = Position.objects.get(name='Header')
+                header_position = Position.objects.get(name='header')
 
                 try:
                     carousel = Carousel.objects.get(page__name=home_page.name, position__name=header_position.name)

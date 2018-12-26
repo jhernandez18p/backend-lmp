@@ -17,7 +17,7 @@
                                 <div class="field has-addons">
                                     <div class="control has-background-white is-marginless">
                                         {% if search == '' %}
-                                            <input class="input" type="text" placeholder="Buscar un producto" id='searchInput'></input>
+                                            <input class="input" type="text" placeholder="Buscar un vehículo" id='searchInput'></input>
                                         {% else %}
                                             <input class="input" type="text" placeholder="{{search}}" value="{{search}}" id='searchInput'></input>
                                         {% endif %}
@@ -41,9 +41,9 @@
                                                 <div class="field">
                                                     <p class="control is-expanded has-icons-left">
                                                         {% if price_lower == '' or price_lower == None %}
-                                                        <input class="input" type="text" placeholder="$0,00" id='priceLowerInput'>
+                                                            <input class="input" type="text" placeholder="$0,00" id='priceLowerInput'>
                                                         {% else %}
-                                                        <input class="input" type="text" placeholder="${{price_lower|floatformat:2|intcomma}}" value="{{price_lower}}" id='priceLowerInput'>
+                                                            <input class="input" type="text" placeholder="${{price_lower|floatformat:2|intcomma}}" value="{{price_lower|floatformat:2|intcomma}}" id='priceLowerInput'>
                                                         {% endif %}
                                                         <span class="icon is-small is-left">
                                                             <i class="fas fa-dollar-sign"></i>
@@ -55,7 +55,7 @@
                                                         {% if price_higher == '' %}
                                                         <input class="input" type="email" placeholder="${{price_higher|floatformat:2|intcomma}}" id='priceHigherInput'>
                                                         {% else %}
-                                                        <input class="input" type="email" placeholder="${{price_higher|floatformat:2|intcomma}}" value="{{price_higherprice_higher|floatformat:2|intcomma}}" id='priceHigherInput'>
+                                                        <input class="input" type="email" placeholder="${{price_higher|floatformat:2|intcomma}}" value="{{price_higher|floatformat:2|intcomma}}" id='priceHigherInput'>
                                                         {% endif %}
                                                         <span class="icon is-small is-left">
                                                             <i class="fas fa-dollar-sign"></i>
