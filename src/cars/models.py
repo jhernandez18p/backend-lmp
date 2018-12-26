@@ -17,7 +17,7 @@ def get_upload_path(instance, filename):
     
     try:
         a = instance.brand.slug.lower()
-        b = instance.model.lower()
+        b = slugify(instance.model.lower())
     except:
         a = 'lmp'
         b = 'base'
