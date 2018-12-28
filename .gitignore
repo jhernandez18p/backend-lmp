@@ -2,3 +2,5 @@
 
 **/migrations/*
 **/media/*
+
+**/*.pyc
