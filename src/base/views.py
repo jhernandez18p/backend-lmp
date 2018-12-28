@@ -49,7 +49,7 @@ class Home(ListView):
         except:
             print('Pages No existe')
         
-        object_list = Car.objects.all()
+        object_list = Car.objects.all().filter(status='IN')
         if object_list.exists():
             context['object_list'] = object_list[:6]
 
@@ -111,7 +111,7 @@ class Inventory(ListView):
 
     def get_queryset(self):
 
-        object_list = self.model.objects.all()
+        object_list = self.model.objects.all().filter(status='IN')
 
         price_lower = ''
         if self.request.GET.get('price_lower'):
@@ -224,9 +224,14 @@ class CarDetail(DetailView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        object_list = self.model.objects.filter(Q(brand=context['object'].brand) | Q(year=context['object'].year)).order_by('?')
-        if object_list.exists():
-            context['object_list'] = object_list[:4]
+
+        # filter(Q(brand=context['object'].brand) | Q(year=context['object'].year)).order_by('?')
+        # filter(status='IN')
+        if self.model.objects.filter(Q(brand=context['object'].brand) | Q(year=context['object'].year)).order_by('?').count() >= 4:
+            context['object_list'] = self.model.objects.filter(Q(brand=context['object'].brand) | Q(year=context['object'].year)).order_by('?')[:4]
+        else:
+            context['object_list'] = self.model.objects.order_by('views')[:4]
+
 
         context['object'].update_counter()
 

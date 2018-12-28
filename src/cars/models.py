@@ -45,6 +45,50 @@ def pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug or instance.slug == '':
         instance.slug = create_slug(instance)
 
+class Fuel(models.Model):
+    """
+    Modelo de datos para el tipo de combustible
+    """
+    name = models.CharField(max_length=144)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = _('Combustible')
+        verbose_name_plural = _('Combustibles')
+
+
+
+class Transmission(models.Model):
+    """
+    Modelo de datos para los tipos de Trnsmisiones 
+    """
+
+    name = models.CharField(max_length=144)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Transmisión')
+        verbose_name_plural = _('Transmisiones')
+
+
+class SubType(models.Model):
+    """
+    Modelo de datos para los tipos de vahículos
+    """
+
+    name = models.CharField(max_length=144)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Tipo de vehículo')
+        verbose_name_plural = _('Tipos de vehiculos')
+
 
 class Car(models.Model):
     """
@@ -101,5 +145,7 @@ class Car(models.Model):
         ordering = ['brand__name']
         verbose_name = _('Carro')
         verbose_name_plural = _('Carros')
+
+
 
 pre_save.connect(pre_save_receiver, sender=Car)

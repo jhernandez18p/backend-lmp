@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericTabularInline
 
-from .models import Car
+from .models import Car, SubType, Transmission, Fuel
 from src.medias.models import Photo, Video
 
 
@@ -109,3 +109,6 @@ class CarModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Car, CarModelAdmin)
+admin.site.register(SubType)
+admin.site.register(Fuel)
+admin.site.register(Transmission)

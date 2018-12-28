@@ -19,7 +19,7 @@ def get_upload_path(instance, filename):
     _filename_ext = _filename[-1]
     _filename_name = ''.join(random.choice(_filename[0]) for _ in range(5))
     filename = '%s.%s' % (_filename_name,_filename_ext)
-    print(filename)
+
     try:
         a = instance.alt.lower()
     except:

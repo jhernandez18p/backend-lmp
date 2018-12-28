@@ -83,92 +83,90 @@
 {% endif %}
 <div class="container-fluid has-background-lmpblack">
     <div class="container">
-        <section class="section">
-            <div class="columns">
-                {% if brand_list_footer %}
-                <div class="column">
-                    <div>
-                        <h3 class="is-size-4 has-text-white">Marcas Destacadas</h3>
-                        <hr class="background-red is-hr-line">
-                    </div>
-                    <ul>
-                        {% for object in brand_list_footer %}
-                        <li class="navbar-item">
-                            <p class="is-size-6">
-                                <a href="{% url 'front:inventory' %}?brand={{object.id}}" class="has-text-light">{{object.name}}</a>
-                            </p>
-                        </li>
-                        {% endfor %}
-                    </ul>
+        <div class="columns">
+            {% if brand_list_footers %}
+            <div class="column">
+                <div>
+                    <h3 class="is-size-4 has-text-white">Marcas Destacadas</h3>
+                    <hr class="background-red is-hr-line">
                 </div>
-                {% endif %}
-                {% if top_five_cars %}
-                <div class="column">
-                    <div>
-                        <h3 class="is-size-4 has-text-white">Inventario</h3>
-                        <hr class="background-red is-hr-line">
-                    </div>
-                    <ul>
-                        {% for car in top_five_cars %}
-                        <li class="navbar-item"><a class="has-text-light" href="{{car.get_absolute_url}}">{{car.brand}} - {{car.model}}</a></li>
-                        {% endfor %}
-                    </ul>
+                <ul>
+                    {% for object in brand_list_footer %}
+                    <li class="navbar-item">
+                        <p class="is-size-6">
+                            <a href="{% url 'front:inventory' %}?brand={{object.id}}" class="has-text-light">{{object.name}}</a>
+                        </p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% if top_five_car %}
+            <div class="column">
+                <div>
+                    <h3 class="is-size-4 has-text-white">Inventario</h3>
+                    <hr class="background-red is-hr-line">
                 </div>
-                {% endif %}
-                <div class="column">
-                    <div>
-                        <h3 class="is-size-4 has-text-white">Encuentranos</h3>
-                        <hr class="background-red is-hr-line">
-                    </div>
-                    <div>
-                        <div id="map">
-                            <a class="has-text-light is-centered" href="https://www.google.com.pa/maps/place/Luxury+Motors+Panama/@8.987793,-79.5100239,19.5z/data=!4m5!3m4!1s0x0:0x167b3f19532d83!8m2!3d8.9879867!4d-79.5096606?hl=es&amp;authuser=0" target="_blank" rel="noopener noreferrer">
-                                <picture>
-                                    <img src="{% static 'base/images/map.jpg' %}" alt="Mapa"></img>
-                                </picture>
+                <ul>
+                    {% for car in top_five_cars %}
+                    <li class="navbar-item"><a class="has-text-light" href="{{car.get_absolute_url}}">{{car.brand}} - {{car.model}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            <div class="column">
+                <div>
+                    <h3 class="is-size-4 has-text-white">Contacto</h3>
+                    <hr class="background-red is-hr-line">
+                </div>
+                <ul class="has-text-light">
+                    <li class="navbar-item">
+                        <p class="is-size-6 has-text-light">Email: <span>luxurymotorspanama@gmail.com</span></p>
+                    </li>
+                    <li class="navbar-item">
+                        <p class="is-size-6 has-text-light">Teléfono: <span>229-0628</span></p>
+                    </li>
+                    <li class="navbar-item">
+                        <p class="is-size-6 has-text-light">celular: <span>6618-8330</span></p>
+                    </li>
+                    <li class="navbar-item">
+                        <p class="is-size-6 has-text-light">Dirección: <span>Calle 68 este, San Francisco</span></p>
+                    </li>
+                </ul>
+                <ul class="">
+                    <li class="navbar-item">
+                        <p>
+                            <a href="https://facebook.com/luxurymotorspanama" target="_blank" rel="noopener noreferrer">
+                                <span class="icon has-text-white is-size-3">
+                                    <i class="fab fa-facebook-square"></i>
+                                </span>
                             </a>
-                        </div>
-                        <ul class="is-centered">
-                            <li class="navbar-item">
-                                <p>
-                                    <a href="https://facebook.com/luxurymotorspanama" target="_blank" rel="noopener noreferrer">
-                                        <span class="icon has-text-white is-size-3">
-                                            <i class="fab fa-facebook-square"></i>
-                                        </span>
-                                    </a>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="https://instagram.com/luxurymotors.panama" target="_blank" rel="noopener noreferrer">
-                                        <span class="icon has-text-white is-size-3">
-                                            <i class="fab fa-instagram"></i>
-                                        </span>
-                                    </a>
-                                </p>
-                            </li>
-                        </ul>
-                    </div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="https://instagram.com/luxurymotors.panama" target="_blank" rel="noopener noreferrer">
+                                <span class="icon has-text-white is-size-3">
+                                    <i class="fab fa-instagram"></i>
+                                </span>
+                            </a>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="column">
+                <div>
+                    <h3 class="is-size-4 has-text-white">Encuentranos</h3>
+                    <hr class="background-red is-hr-line">
                 </div>
-                <div class="column">
-                    <div>
-                        <h3 class="is-size-4 has-text-white">Contacto</h3>
-                        <hr class="background-red is-hr-line">
+                <div>
+                    <div id="map">
+                        <a class="has-text-light is-centered" href="https://www.google.com.pa/maps/place/Luxury+Motors+Panama/@8.987793,-79.5100239,19.5z/data=!4m5!3m4!1s0x0:0x167b3f19532d83!8m2!3d8.9879867!4d-79.5096606?hl=es&amp;authuser=0" target="_blank" rel="noopener noreferrer">
+                            <picture>
+                                <img src="{% static 'base/images/map.jpg' %}" alt="Mapa"></img>
+                            </picture>
+                        </a>
                     </div>
-                    <ul class="has-text-light">
-                        <li class="navbar-item">
-                            <p class="is-size-6 has-text-light">Email: <span>luxurymotorspanama@gmail.com</span></p>
-                        </li>
-                        <li class="navbar-item">
-                            <p class="is-size-6 has-text-light">Teléfono: <span>229-0628</span></p>
-                        </li>
-                        <li class="navbar-item">
-                            <p class="is-size-6 has-text-light">celular: <span>6618-8330</span></p>
-                        </li>
-                        <li class="navbar-item">
-                            <p class="is-size-6 has-text-light">Dirección: <span>Calle 68 este, San Francisco</span></p>
-                        </li>
-                    </ul>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
     <div id="is-copyright">
         <nav class="navbar is-black">
