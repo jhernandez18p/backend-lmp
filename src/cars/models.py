@@ -94,32 +94,36 @@ class Car(models.Model):
     """
     Modelo de datos para los carros
     """
+    
     SOLD = 'SOLD'
     OUT_STOCK = 'OUT'
     IN_STOCK = 'IN'
     COMING = 'COMING'
+    
     CAR_STATUS_CHOICES = (
         (SOLD, 'Vendido'),
         (OUT_STOCK, 'Agotado'),
         (IN_STOCK, 'Disponible'),
         (COMING, 'Llega proximamente'),
     )
+    
     img = models.ImageField(
         upload_to=get_upload_path,
         # null=True,
         blank=True,
         default='photos/lmp.jpg',
     )
+
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     model = models.CharField(max_length=140, blank=True)
     milage = models.CharField(max_length=140, blank=True)
     year = models.CharField(max_length=140, blank=True)
-    direction = models.CharField(max_length=140, blank=True)
-    sub_type = models.CharField(max_length=140, blank=True)
-    traction = models.CharField(max_length=140, blank=True)
-    transmission = models.CharField(max_length=140, blank=True)
+    # direction = models.CharField(max_length=140, blank=True)
+    # traction = models.CharField(max_length=140, blank=True)
+    # sub_type = models.ForeignKey(SubType, on_delete=models.CASCADE, blank=True, null=True)
+    transmission = models.ForeignKey(Transmission, on_delete=models.CASCADE, blank=True, null=True)
+    fuel = models.ForeignKey(Fuel, on_delete=models.CASCADE, blank=True, null=True)
     color = models.CharField(max_length=140, blank=True)
-    fuel = models.CharField(max_length=140, blank=True)
     engine = models.CharField(max_length=140, blank=True)
     price = models.IntegerField(blank=True, null=True)
     slug = models.CharField(max_length=140, blank=True)

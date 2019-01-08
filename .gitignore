@@ -1,6 +1,8 @@
+**.**.pyc
 **.pyc
 
 **/migrations/*
 **/media/*
 
-**/*.pyc
+**/**/*.*.pyc
+**/**/*.*.pyc
