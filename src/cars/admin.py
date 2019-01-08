@@ -102,7 +102,7 @@ class CarModelAdmin(admin.ModelAdmin):
     #     (_('Author'), {'fields': ['author','']}),
     #     ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
     # ]
-    inlines = [PhotoInline, VideoInline]
+    inlines = [PhotoInline]
     
     class Meta:
         model = Car
