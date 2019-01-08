@@ -107,7 +107,7 @@ class About(ListView):
 class Inventory(ListView):
     model = Car
     template_name = 'pages/inventory.html'
-    paginate_by = 20
+    paginate_by = 18
 
     def get_queryset(self):
 
