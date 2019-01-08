@@ -49,7 +49,7 @@ class Home(ListView):
         except:
             print('Pages No existe')
         
-        object_list = Car.objects.all().filter(status='IN')
+        object_list = Car.objects.all().filter(status='IN').order_by('views')
         if object_list.exists():
             context['object_list'] = object_list[:6]
 
