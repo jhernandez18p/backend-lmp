@@ -3,78 +3,68 @@
 <div class="container">
     <section class="section">
         <div class="columns">
-            <div class="column">
-                <div>
-                    <figure class="image is-5by4"><img src="{% static 'base/images/cars/carros-07.jpg' %}" alt="Contactenos"></figure>
-                </div>
-            </div>
-            <div class="column">
-                <div class="form-over is-hidden-touch">
-                    <div>
-                        <form method="post" enctype="multipart/form-data" action="{% url 'front:contact' %}">
-                            {% csrf_token %}
-                            <div class="field is-horizontal">
-                                <div class="field-label is-normal"><label class="label">Nombre Completo</label></div>
-                                <div class="field-body">
-                                    <div class="field">
-                                        <div class="control"><input class="input" type="text" placeholder="John Doe" name="name"></div>
+            <div class="column is-8 is-offset-2">
+                <div class="newsletter-body">
+                    <form method="post" enctype="multipart/form-data" action="{% url 'front:contact' %}">
+                        {% csrf_token %}
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal"><label class="label has-text-light">Nombre Completo</label></div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control"><input class="input" type="text" placeholder="John Doe" name="name"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal"><label class="label has-text-light">Email</label></div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control"><input class="input" type="text" placeholder="johndoe@email.com" name="email"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal"><label class="label has-text-light">Número de teléfono</label></div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control"><input class="input" type="text" placeholder="+507 0000 0000" name="phone"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <label class="label has-text-light">¿Cómo prefiere ser contactado?</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="field is-narrow">
+                                    <div class="control">
+                                        <label class="radio"><input type="radio" name="contact">Email</label>
+                                        <label class="radio"><input type="radio" name="contact">teléfono</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="field is-horizontal">
-                                <div class="field-label is-normal"><label class="label">Email</label></div>
-                                <div class="field-body">
-                                    <div class="field">
-                                        <div class="control"><input class="input" type="text" placeholder="johndoe@email.com" name="email"></div>
+                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal"><label class="label has-text-light">Comentarios</label></div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control">
+                                        <textarea class="textarea" placeholder="¿Comó te podemos ayudar?" name="message"></textarea>
                                     </div>
                                 </div>
                             </div>
-                            <div class="field is-horizontal">
-                                <div class="field-label is-normal"><label class="label">Número de teléfono</label></div>
-                                <div class="field-body">
-                                    <div class="field">
-                                        <div class="control"><input class="input" type="text" placeholder="+507 0000 0000" name="phone"></div>
+                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label"></div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control">
+                                        <button class="button background-red has-text-white is-fullwidth">Enviar</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="field is-horizontal">
-                                <div class="field-label">
-                                    <label class="label">¿Cómo prefiere ser contactado?</label>
-                                </div>
-                                <div class="field-body">
-                                    <div class="field is-narrow">
-                                        <div class="control">
-                                            <label class="radio"><input type="radio" name="contact">Email</label>
-                                            <label class="radio"><input type="radio" name="contact">teléfono</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="field is-horizontal">
-                                <div class="field-label is-normal"><label class="label">Comentarios</label></div>
-                                <div class="field-body">
-                                    <div class="field">
-                                        <div class="control">
-                                            <textarea class="textarea" placeholder="¿Comó te podemos ayudar?" name="message"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="field is-horizontal">
-                                <div class="field-label"></div>
-                                <div class="field-body">
-                                    <div class="field">
-                                        <div class="control">
-                                            <button class="button background-red has-text-white">Enviar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <figure class="image is-5by4 is-hidden-tablet-only">
-                        <img src="{% static 'base/images/cars/carros-11.jpg' %}" alt="Formulario de contacto"></img>
-                    </figure>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -124,13 +114,13 @@
                         <p class="is-size-6 has-text-light">Email: <span>luxurymotorspanama@gmail.com</span></p>
                     </li>
                     <li class="navbar-item">
-                        <p class="is-size-6 has-text-light">Teléfono: <span>229-0628</span></p>
+                        <p class="is-size-6 has-text-light">Teléfono: <span>+507-229-0628</span></p>
                     </li>
                     <li class="navbar-item">
-                        <p class="is-size-6 has-text-light">celular: <span>6618-8330</span></p>
+                        <p class="is-size-6 has-text-light">Celular: <span>+507-6618-8330</span> / <span>+507-6678-3330</span></p>
                     </li>
                     <li class="navbar-item">
-                        <p class="is-size-6 has-text-light">Dirección: <span>Calle 68 este, San Francisco</span></p>
+                        <p class="is-size-6 has-text-light">Dirección: <span>Calle 68 este, San Francisco, diagonal a El Llantero</span></p>
                     </li>
                 </ul>
                 <ul class="">
@@ -145,6 +135,18 @@
                             <a href="https://instagram.com/luxurymotors.panama" target="_blank" rel="noopener noreferrer">
                                 <span class="icon has-text-white is-size-3">
                                     <i class="fab fa-instagram"></i>
+                                </span>
+                            </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="https://wa.me/50766188330" target="_blank" rel="noopener noreferrer">
+                                <span class="icon has-text-white is-size-3">
+                                    <i class="fab fa-whatsapp"></i>
+                                </span>
+                            </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="https://wa.me/50766783330" target="_blank" rel="noopener noreferrer">
+                                <span class="icon has-text-white is-size-3">
+                                    <i class="fab fa-whatsapp"></i>
                                 </span>
                             </a>
                         </p>
