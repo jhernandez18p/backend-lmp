@@ -108,10 +108,12 @@
                 </div>
                 <div class="columns">
                     <div class="column">
-                        {% if object.description %}
-                        <h3 class="is-size-5">Descripciones</h3>
-                        <p class="has-text-grey-light">{{object.description | safe}}</p>
-                        {% endif %}
+                        <div class="is-padding-y-10">
+                            {% if object.description %}
+                            <h3 class="is-size-5">Descripciones</h3>
+                            <p class="has-text-grey-light">{{object.description | safe}}</p>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
                 <div class="columns">
