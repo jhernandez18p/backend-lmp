@@ -7179,3 +7179,6 @@ body {
     border-radius: 5px;
     color: #FFF    
   }
+  #brandCarousel .slick-slide img {
+    border-radius: 50%;
+  }
