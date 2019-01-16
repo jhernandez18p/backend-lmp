@@ -3,8 +3,9 @@
 <div class="container">
     <section class="section">
         <div class="columns">
-            <div class="column is-8 is-offset-2">
-                <div class="newsletter-body">
+            <div class="column is-10 is-offset-1">
+                <div class="newsletter-body has-background-lmpblack">
+                    <h3 class="is-size-3 is-margin-bottom-20 has-text-white has-text-centered">Formulario de contacto</h3>
                     <form method="post" enctype="multipart/form-data" action="{% url 'front:contact' %}">
                         {% csrf_token %}
                         <div class="field is-horizontal">
@@ -39,7 +40,7 @@
                                 <div class="field is-narrow">
                                     <div class="control">
                                         <label class="radio"><input type="radio" name="contact">Email</label>
-                                        <label class="radio"><input type="radio" name="contact">teléfono</label>
+                                        <label class="radio"><input type="radio" name="contact">Teléfono</label>
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +50,7 @@
                             <div class="field-body">
                                 <div class="field">
                                     <div class="control">
-                                        <textarea class="textarea" placeholder="¿Comó te podemos ayudar?" name="message"></textarea>
+                                        <textarea class="textarea" placeholder="¿Comó le podemos ayudar?" name="message"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -121,6 +122,9 @@
                     </li>
                     <li class="navbar-item">
                         <p class="is-size-6 has-text-light">Dirección: <span>Calle 68 este, San Francisco, diagonal a El Llantero</span></p>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="is-size-6 has-text-light" href="{% url 'front:contact-f-a-q' %}?next={{request.path}}">Preguntas frecuentes</a>
                     </li>
                 </ul>
                 <ul class="">

@@ -7,9 +7,16 @@
                     <img src="{%  static 'base/images/logo.png' %}" alt="Luxury Motors Panamá" id="isHeaderLogo"></img>
                 </a>
             </div>
+            <div class="column is-hidden-touch">
+                <a class="active" aria-current="page" href="{% url 'front:inventory' %}">
+                    <img src="{%  static 'base/images/header.jpg' %}" alt="Compra venta"></img>
+                </a>
+            </div>
         </div>
     </div>
-    <nav class="has-background-lmpblack is-colored-nav is-fixed-top">
+</div>
+<div class="has-background-lmpblack has-navbar-fixed-top">
+    <nav class="navbar has-background-lmpblack is-colored-nav" id="navBar">
         <div class="container">
             <div class="navbar-brand is-hidden-desktop">
                 <a class="navbar-item" href="{% url 'front:home' %}">
@@ -26,7 +33,7 @@
                     <a class="navbar-item has-text-white is-uppercase {% if menu == 'home' %}is-navbar-active-home{% endif %}" aria-current="page" data-target="navMenu" href="{% url 'front:home' %}">Inicio</a>
                     <a class="navbar-item has-text-white is-uppercase {% if menu == 'about' %}is-navbar-active-home{% endif %}" data-target="navMenu" href="{% url 'front:about' %}">¿Quienes somos?</a>
                     <a class="navbar-item has-text-white is-uppercase {% if menu == 'inventory' %}is-navbar-active-home{% endif %}" data-target="navMenu" href="{% url 'front:inventory' %}">Inventario</a>
-                    <a class="navbar-item has-text-white is-uppercase {% if menu == 'contact' %}is-navbar-active-home{% endif %}" data-target="navMenu" href="{% url 'front:contact' %}">Contacto</a>
+                    <a class="navbar-item has-text-white is-uppercase {% if menu == 'contact' %}is-navbar-active-home{% endif %}" data-target="navMenu" id="contactLink">Contacto</a>
                 </div>
             </div>
         </div>

@@ -6926,7 +6926,6 @@ body {
   .copyright{width: 100%;border-top: 1px solid #fff;}
   .Branded{min-height: 80px;}
   #header{padding-top: 15px;}
-  .is-colored-nav{border-top: 2.3px solid rgb(255, 0, 0);border-bottom: 2.3px solid rgb(255, 0, 0);}
   .navbar-menu.is-active { min-height: 100vh; position: fixed; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: 99; }
   .navbar-menu.is-active .navbar-end{text-align: center;padding-top: 30vh}
   .navbar-burger.active{z-index: 99; top: 0; color:rgb(156, 10, 20);}
@@ -7075,6 +7074,7 @@ body {
     padding-top: 0px
   }
   .is-margin-top-20{margin-top: 20px;}
+  .is-margin-bottom-20{margin-bottom: 20px;}
   
   
   
@@ -7174,7 +7174,6 @@ body {
   #productsSearcherMov .body-box div h3{padding-left: 10px;margin-bottom: 5px !important;margin-top: 5px;}
 
   .newsletter-body {
-    background-color: #000000;
     padding: 25px;margin: 0 10px;
     border-radius: 5px;
     color: #FFF    
@@ -7182,3 +7181,5 @@ body {
   #brandCarousel .slick-slide img {
     border-radius: 50%;
   }
+  html{background-color: #000}
+  .is-colored-nav{border-top: 2.3px solid rgb(255, 0, 0);border-bottom: 2.3px solid rgb(255, 0, 0);margin-bottom: 3px;}
