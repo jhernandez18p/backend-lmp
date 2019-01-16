@@ -50,7 +50,6 @@
                         </div>
                     </div>    
                 </div>
-                <hr>
                 <div class="columns">
                     <div class="column">
                         <div class="is-padding-y-10">
@@ -102,18 +101,17 @@
                             {% endif %}
                             {% if object.engine %}
                             <h3 class="is-size-5 has-text-white">Tipo de motor</h3>
-                            <div class="has-text-grey-light">{{object.engine}}</div>
+                            <a class="has-text-grey-light">{{object.engine}}</a>
                             {% endif %}
                         </div>
                     </div>
                 </div>
-                <hr>
                 <div class="columns">
                     <div class="column">
                         <div class="is-padding-y-10">
                             {% if object.description %}
                             <h3 class="is-size-5 has-text-white">Descripciones</h3>
-                            <p class="has-text-grey-light">{{object.description | safe}}</p>
+                            <div class="has-text-grey-light">{{object.description | safe}}</div>
                             {% endif %}
                         </div>
                     </div>
