@@ -5,6 +5,20 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $('.sticky').fadeIn();
+        $(document).scroll(function () {
+            var bodyRect = document.body.getBoundingClientRect(),
+                elemRect = document.getElementById("SMStopper").getBoundingClientRect(),
+                offset = elemRect.top - bodyRect.top - window.innerHeight;
+            var y = $(this).scrollTop();
+            if (y > 100 && y < offset) {
+                $('.sticky').fadeIn();
+            } else {
+                $('.sticky').fadeOut();
+            }
+        });
+
         $("#mainMenu").click(function () {
             $(".navbar-burger").toggleClass("is-active");
             $(".navbar-menu").toggleClass("active is-active");

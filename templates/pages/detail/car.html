@@ -103,16 +103,20 @@
                             <h3 class="is-size-5">Tipo de motor</h3>
                             <p class="has-text-grey-light">{{object.engine}}</p>
                             {% endif %}
-                            {% if object.description %}
-                            <h3 class="is-size-5">Descripciones</h3>
-                            <p class="has-text-grey-light">{{object.description | safe}}</p>
-                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <div class="columns">
                     <div class="column">
-                        <a class="button is-normal background-red has-text-white is-fullwidth" href="{% url 'front:contact-quote' %}?brand={{object.brand}}&model={{object.model}}&year={{object.year}}&next={{request.path}}">Cotizar {{object.brand}} {{object.model}}</a>
+                        {% if object.description %}
+                        <h3 class="is-size-5">Descripciones</h3>
+                        <p class="has-text-grey-light">{{object.description | safe}}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <a class="button is-normal background-red has-text-white is-fullwidth is-uppercase has-text-weight-semibold" href="{% url 'front:contact-quote' %}?brand={{object.brand}}&model={{object.model}}&year={{object.year}}&next={{request.path}}">Cotizar {{object.brand}} {{object.model}}</a>
                     </div>
                 </div>
             </div>
@@ -141,8 +145,8 @@
                         </figure>
                         <div class="img-text-overlay">
                             <div class="text">
-                                <h3 class="is-size-4">{{object.model}}</h3>
-                                <p class="">{{object.brand}}</p>
+                                <h3 class="is-size-5">{{object.model}}</h3>
+                                <p class="is-size-6">{{object.brand}}</p>
                             </div>
                         </div>
                     </div>

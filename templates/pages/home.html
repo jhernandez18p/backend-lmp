@@ -1,8 +1,22 @@
 {% extends 'base/base.html' %}{% load staticfiles %}
 
 {% block content %}
-
 <div class="container">
+    <div class="columns">
+        {% if brand_list %}
+        <div class="column">
+            <div id="brandCarousel">
+                {% for object in brand_list %}
+                <div>
+                    <a href="{% url 'front:inventory' %}?brand={{object.id}}">
+                        <img src="{{object.img.url}}" alt="{{object.name}}">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
     {% if carousel_image_list %}
     <div class="columns">
         <div class="column is-12" id="siteHeaderCarousel">
@@ -56,7 +70,7 @@
             <div class="has-text-centered">
                 <h2 class="title is-uppercase">
                     <a class="button has-text-white is-fullwidth background-red" id="" href="{% url 'front:inventory' %}">
-                        cargar más
+                        ver más
                     </a>
                 </h2>
             </div>

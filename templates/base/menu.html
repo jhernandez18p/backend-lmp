@@ -1,5 +1,5 @@
 {% load static %}
-<div id="header">
+<div class="has-background-lmpblack" id="header">
     <div class="container">
         <div class="columns">
             <div class="column is-one-third is-hidden-touch">
@@ -7,19 +7,6 @@
                     <img src="{%  static 'base/images/logo.png' %}" alt="Luxury Motors Panamá" id="isHeaderLogo"></img>
                 </a>
             </div>
-            {% if brand_list %}
-            <div class="column is-two-thirds">
-                <div id="brandCarousel">
-                    {% for object in brand_list %}
-                    <div>
-                        <a href="{% url 'front:inventory' %}?brand={{object.id}}">
-                            <img src="{{object.img.url}}" alt="{{object.name}}">
-                        </a>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endif %}
         </div>
     </div>
     <nav class="has-background-lmpblack is-colored-nav is-fixed-top">
