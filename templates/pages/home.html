@@ -47,9 +47,9 @@
                         <div class="img-container is-radius is-inventory">
                             <figure class="image is-5by3">
                                 {% if object.img.url != None %}
-                                <img src="{{object.img.url}}" alt="Luxury Motors Panamá">
+                                <img src="{{object.img.url}}" alt="{{object.model}}">
                                 {% else %}
-                                <img src="{% static 'base/images/cars/ford/explorer-XLT-2016/01.jpg' %}" alt="Ford">
+                                <img src="{% static 'base/images/cars/ford/explorer-XLT-2016/01.jpg' %}" alt="{{ object.model }}">
                                 {% endif %}
                             </figure>
                             <div class="img-text-overlay">
