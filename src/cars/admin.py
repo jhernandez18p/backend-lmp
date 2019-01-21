@@ -63,9 +63,9 @@ class CarModelAdmin(admin.ModelAdmin):
     #     ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
     # ]
 
-    readonly_fields = ["car_image"]
+    readonly_fields = ["imagen_principal_del_carro"]
 
-    def car_image(self, obj):
+    def imagen_principal_del_carro(self, obj):
         return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
             url=obj.img.url,
             width=obj.img.width / 3,
