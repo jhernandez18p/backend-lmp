@@ -17,8 +17,12 @@ def site(request):
     """
     context = {}
     context['SITE_TITLE'] = 'Luxury Motors Panamá'
+    context['SITE_DESCRIPTION'] = 'Con mas de 20 años en el mercado de autos de lujos, somos pioneros en la ciudad de Panamá y contamos con amplia experiencia en el area.'
     context['SITE_URL'] = 'https://www.luxurymotorspanama.com/'
     context['SITE_LOGO'] = '/static/base/images/logo.png'
+    context['SITE_ABOUT_IMG'] = '/static/base/images/about.jpg'
+    context['SITE_TRADEIN_IMG'] = '/static/base/images/cars/carros-04.jpg'
+    context['SITE_HEADER_IMG'] = '/static/base/images/header.jpg'
 
     pages = Pages.objects.all()
     if not pages.exists():
@@ -50,10 +54,34 @@ def site(request):
             )
             new_position.save()
 
-    info_site = Site.objects.filter(id=1)
-    if info_site.exists():
-        context['info_site'] = info_site[0]
-        sm = SocialMedia.objects.filter(site=info_site[0].id)
+    info_site = Site.objects.first()
+    if info_site:
+        context['info_site'] = info_site
+        sm = SocialMedia.objects.filter(site=info_site.id)
+        context['SITE_TITLE'] = info_site.title
+        context['SITE_DESCRIPTION'] = info_site.description
+        
+        try:
+            context['SITE_LOGO'] = info_site.logo.url
+        except:
+            pass
+
+        try:
+            context['SITE_ABOUT_IMG'] = info_site.about_img.url
+        except:
+            pass
+
+        try:
+            context['SITE_TRADEIN_IMG'] = info_site.trade_in_img.url
+        except:
+            pass
+
+        try:
+            context['SITE_HEADER_IMG'] = info_site.header_img.url
+        except:
+            pass
+
+
         if sm.exists():
             context['social_media'] = sm
     else:

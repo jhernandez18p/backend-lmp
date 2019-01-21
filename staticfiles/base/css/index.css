@@ -7180,6 +7180,7 @@ body {
   }
   #brandCarousel .slick-slide img {
     border-radius: 50%;
+    border: solid 3px rgb(156, 10, 20);
   }
   html{background-color: #000}
-  .is-colored-nav{border-top: 2.3px solid rgb(255, 0, 0);border-bottom: 2.3px solid rgb(255, 0, 0);margin-bottom: 3px;}
+  .is-colored-nav{border-top: 2.3px solid rgb(156, 10, 20);border-bottom: 2.3px solid rgb(156, 10, 20);margin-bottom: 3px;}

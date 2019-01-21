@@ -125,6 +125,9 @@ class Site(models.Model):
     site_img = models.ImageField(null=True, blank=True, upload_to=get_upload_path, verbose_name = _('Imágen destacada'))
     services_img = models.ImageField(null=True, blank=True, upload_to=get_upload_path, verbose_name = _('Imágen para servicios'))
     products_img = models.ImageField(null=True, blank=True, upload_to=get_upload_path, verbose_name = _('Imágen para productos'))
+    header_img = models.ImageField(null=True, blank=True, upload_to=get_upload_path, verbose_name = _('Imágen para el Header'))
+    about_img = models.ImageField(null=True, blank=True, upload_to=get_upload_path, verbose_name = _('Imágen para About'))
+    trade_in_img = models.ImageField(null=True, blank=True, upload_to=get_upload_path, verbose_name = _('Imágen para Trade-in'))
     is_undercostruction = models.BooleanField( default=False,verbose_name = _('en construcción'))
 
     def __str__(self):

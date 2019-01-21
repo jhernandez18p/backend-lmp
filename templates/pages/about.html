@@ -8,22 +8,21 @@
             <div>
                 <div class="img-container is-radius is-inventory">
                     <figure class="image">
-                        {% if object.img.url != None %}
-                        <img src="{{object.img.url}}" alt="Luxury Motors Panamá">
-                        {% else %}
-                        <img src="{% static 'base/images/about.jpg' %}" alt="Contactenos">
-                        {% endif %}
+                        <img src="{{ SITE_ABOUT_IMG }}" alt="Luxury Motors Panamá">
                     </figure>
                     <div class="img-text-overlay-active">
                         <div class="text">
-                            <h3 class="is-size-2 is-size-5-touch">Luxury Motors Panamá</h3>
-                            <p class="is-size-5 is-size-7-touch has-text-grey-light">Con mas de 20 años en el mercado de autos de lujos, somos pioneros en la ciudad de Panamá y contamos con amplia experiencia en el area.</p>
+                            <h3 class="is-size-2 is-size-5-touch">{{ SITE_TITLE | safe }}</h3>
+                            <p class="is-size-5 is-size-7-touch has-text-grey-light">
+                                {{ SITE_DESCRIPTION | safe}}
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {% if carousel_image_list %}
     <div class="hero">
         <div class="hero-body">
             <div class="container has-text-centered">
@@ -40,6 +39,7 @@
         {% endfor %}
         </div>
     </div>
+    {% endif %}
 </div>
 
 {% endblock %}

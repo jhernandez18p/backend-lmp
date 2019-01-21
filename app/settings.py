@@ -39,11 +39,6 @@ if DEBUG:
 else:
     # DEBUG = False
     ALLOWED_HOSTS = ['*']
-    
-    CORS_ORIGIN_WHITELIST = (
-        'localhost:9000',
-        'localhost:3000',
-    )
     MESSAGE_LEVEL = message_constants.INFO
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -158,18 +153,6 @@ AUTHENTICATION_BACKENDS = [
 
 # Django Rest Framework Setup
 REST_FRAMEWORK = {
-#    'DEFAULT_PERMISSION_CLASSES': (
-#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-#         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-#         'rest_framework.permissions.IsAuthenticated',
-#    ),
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#         'rest_framework.authentication.TokenAuthentication',
-#         'rest_framework.authentication.SessionAuthentication',
-#         'rest_framework.authentication.BasicAuthentication',
-#     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 20,
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)

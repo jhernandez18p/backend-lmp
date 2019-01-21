@@ -20,19 +20,11 @@ class VideoInline(GenericTabularInline):
 
 class CarModelAdmin(admin.ModelAdmin):
     list_display = [
-        'brand',
         'model',
-        'milage',
+        'brand',
         'year',
-        'direction',
         'sub_type',
-        'traction',
-        'transmission',
-        'color',
-        'fuel',
-        'engine',
         'price',
-        'slug',
         'description',
         'status',
         'views',
@@ -44,58 +36,24 @@ class CarModelAdmin(admin.ModelAdmin):
 
     list_editable = [
         'brand',
-        'milage',
         'year',
-        'direction',
         'sub_type',
-        'traction',
-        'transmission',
-        'color',
-        'fuel',
-        'engine',
         'price',
-        'slug',
-        'description',
         'status',
-        'views',
-
     ]
     list_filter = [
         'brand',
         'model',
-        'milage',
-        'year',
-        'direction',
         'sub_type',
-        'traction',
-        'transmission',
-        'color',
-        'fuel',
-        'engine',
-        'price',
-        'slug',
-        'description',
         'status',
-        'views',
 
     ]
     search_fields = [
         'brand',
         'model',
-        'milage',
         'year',
-        'direction',
-        'sub_type',
-        'traction',
-        'transmission',
-        'color',
-        'fuel',
-        'engine',
-        'price',
-        'slug',
         'description',
         'status',
-        'views',
     ]
     
     # fieldsets = [
