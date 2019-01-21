@@ -107,33 +107,23 @@ class Car(models.Model):
         (COMING, 'Llega proximamente'),
     )
     
-    img = models.ImageField(
-        upload_to=get_upload_path,
-        # null=True,
-        blank=True,
-        default='photos/lmp.jpg',
-    )
-
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
-    model = models.CharField(max_length=140, blank=True)
-    milage = models.CharField(max_length=140, blank=True)
-    year = models.CharField(max_length=140, blank=True)
-    direction = models.CharField(max_length=140, blank=True)
-    traction = models.CharField(max_length=140, blank=True)
-    sub_type = models.ForeignKey(SubType, on_delete=models.CASCADE, blank=True, null=True)
-    transmission = models.ForeignKey(Transmission, on_delete=models.CASCADE, blank=True, null=True)
-    fuel = models.ForeignKey(Fuel, on_delete=models.CASCADE, blank=True, null=True)
-    color = models.CharField(max_length=140, blank=True)
-    engine = models.CharField(max_length=140, blank=True)
-    price = models.IntegerField(blank=True, null=True)
-    slug = models.CharField(max_length=140, blank=True)
-    description = RichTextField(blank=True)
-    status = models.CharField('status', max_length=10, choices=CAR_STATUS_CHOICES, default='IN', blank=True)
-    views = models.SmallIntegerField(
-        default=0,
-        blank=True,
-        verbose_name=_('Numero de visitas')
-    )
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name=_('Marca'))
+    model = models.CharField(max_length=140, blank=True, verbose_name=_('Modelo'))
+    milage = models.CharField(max_length=140, blank=True, verbose_name=_('Kilometraje'))
+    year = models.CharField(max_length=140, blank=True, verbose_name=_('Año'))
+    direction = models.CharField(max_length=140, blank=True, verbose_name=_('Dirección'))
+    traction = models.CharField(max_length=140, blank=True, verbose_name=_('Trancción'))
+    sub_type = models.ForeignKey(SubType, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('Tipo de carrocería'))
+    transmission = models.ForeignKey(Transmission, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('Transmisón'))
+    fuel = models.ForeignKey(Fuel, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('Combustible'))
+    color = models.CharField(max_length=140, blank=True, verbose_name=_('Color'))
+    engine = models.CharField(max_length=140, blank=True, verbose_name=_('Motor'))
+    price = models.IntegerField(blank=True, null=True, verbose_name=_('Precio de venta'))
+    slug = models.CharField(max_length=140, blank=True, verbose_name=_('Enlace SEO'))
+    description = RichTextField(blank=True, verbose_name=_('Descripción'))
+    status = models.CharField( max_length=10, choices=CAR_STATUS_CHOICES, default='IN', blank=True, verbose_name=_('Estado de stock'))
+    views = models.SmallIntegerField(default=0,blank=True,verbose_name=_('Numero de visitas'))
+    img = models.ImageField( upload_to=get_upload_path, blank=True,default='photos/lmp.jpg', verbose_name=_('Imágen principal'))
 
     def __str__(self):
         return '%s %s' %( self.model, self.year )
