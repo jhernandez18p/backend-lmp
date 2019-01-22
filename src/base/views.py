@@ -243,12 +243,14 @@ class CarDetail(DetailView):
         # filter(status='IN')
 
         if self.model.objects.exclude(id=context['object'].id).filter(Q(brand=context['object'].brand) | Q(year=context['object'].year)).order_by('?').count() >= 4:
-            context['object_list'] = self.model.objects.exclude(id=context['object'].id).filter( 
-                Q(status='IN') & Q(status='SOLD') (
-                    Q(brand=context['object'].brand) | Q(year=context['object'].year)
-                )).order_by('?')[:4]
+            query = self.model.objects.exclude(id=context['object'].id).filter(
+                    ( Q(status='IN') | Q(status='SOLD') ) &
+                    ( Q(brand=context['object'].brand) | Q(year=context['object'].year) )
+                ).order_by('?')[:4]
         else:
-            context['object_list'] = self.model.objects.exclude(id=context['object'].id).order_by('views')[:4]
+            query = self.model.objects.exclude(id=context['object'].id).filter(Q(status='IN') | Q(status='SOLD')).order_by('views')[:4]
+
+        context['object_list'] = query
 
 
         context['object'].update_counter()
