@@ -5,5 +5,5 @@
 **/media/*
 !/media/lmp.jpg
 
-**/**/*.*.pyc
+/*/*_pycache_*
 **/**/*.*.pyc

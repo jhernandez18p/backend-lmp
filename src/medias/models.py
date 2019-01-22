@@ -35,7 +35,7 @@ class Photo(models.Model):
         upload_to=get_upload_path,
         # null=True,
         blank=True,
-        default='photos/lmp.jpg',
+        default='lmp.jpg',
     )
     category = models.CharField(max_length=144, blank=True)
     alt = models.CharField(max_length=144, blank=True)

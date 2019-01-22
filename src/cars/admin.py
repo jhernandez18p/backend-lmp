@@ -14,19 +14,6 @@ class PhotoInline(GenericTabularInline):
     extra = 3
     max_num = 15
 
-    
-    readonly = ('image')
-
-    def imagen(self, obj):
-        return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
-            url=obj.img.url,
-            width=obj.img.width / 3,
-            height=obj.img.height / 3,
-        )
-    )
-
-
-
 
 class VideoInline(GenericTabularInline):
     model = Video

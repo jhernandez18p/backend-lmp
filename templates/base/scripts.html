@@ -7,16 +7,6 @@
 
 
     $(document).ready(function () {
-        $(document).scroll(function () {
-            var y = $(this).scrollTop();
-            if (y > 100) {
-                // $('.bottomMenu').fadeIn();
-                alert('Scroll > 1000');
-            } else {
-                // $('.bottomMenu').fadeOut();
-                alert('Scroll < 1000');
-            }
-        });
 
         $("#mainMenu").click(function () {
             $(".navbar-burger").toggleClass("is-active");
