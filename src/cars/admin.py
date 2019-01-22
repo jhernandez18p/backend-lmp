@@ -11,7 +11,6 @@ from src.medias.models import Photo, Video
 
 class PhotoInline(GenericTabularInline):
     model = Photo
-    extra = 3
     max_num = 15
 
 

@@ -222,15 +222,18 @@ class CarDetail(DetailView):
     template_name = 'pages/detail/car.html'
     
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
 
         # filter(Q(brand=context['object'].brand) | Q(year=context['object'].year)).order_by('?')
         # filter(status='IN')
-        if self.model.objects.filter(Q(brand=context['object'].brand) | Q(year=context['object'].year)).order_by('?').count() >= 4:
-            context['object_list'] = self.model.objects.filter(Q(brand=context['object'].brand) | Q(year=context['object'].year)).order_by('?')[:4]
+
+        if self.model.objects.exclude(id=context['object'].id).filter(Q(brand=context['object'].brand) | Q(year=context['object'].year)).order_by('?').count() >= 4:
+            context['object_list'] = self.model.objects.exclude(id=context['object'].id).filter( 
+                Q(status='IN') & (
+                    Q(brand=context['object'].brand) | Q(year=context['object'].year)
+                )).order_by('?')[:4]
         else:
-            context['object_list'] = self.model.objects.order_by('views')[:4]
+            context['object_list'] = self.model.objects.exclude(id=context['object'].id).order_by('views')[:4]
 
 
         context['object'].update_counter()
