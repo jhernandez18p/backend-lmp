@@ -111,7 +111,7 @@ class Inventory(ListView):
 
     def get_queryset(self):
 
-        object_list = self.model.objects.all().filter(status='IN')
+        object_list = self.model.objects.all()
 
         price_lower = ''
         try:
@@ -163,7 +163,7 @@ class Inventory(ListView):
             pass
         
         
-        return object_list.order_by('updated')
+        return object_list.order_by('updated').filter(Q(status='IN') | Q(status='SOLD'))
 
     
     def get_context_data(self, **kwargs):
@@ -244,7 +244,7 @@ class CarDetail(DetailView):
 
         if self.model.objects.exclude(id=context['object'].id).filter(Q(brand=context['object'].brand) | Q(year=context['object'].year)).order_by('?').count() >= 4:
             context['object_list'] = self.model.objects.exclude(id=context['object'].id).filter( 
-                Q(status='IN') & (
+                Q(status='IN') & Q(status='SOLD') (
                     Q(brand=context['object'].brand) | Q(year=context['object'].year)
                 )).order_by('?')[:4]
         else:

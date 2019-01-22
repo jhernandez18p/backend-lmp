@@ -52,7 +52,10 @@
                                 <img src="{% static 'base/images/cars/ford/explorer-XLT-2016/01.jpg' %}" alt="{{ object.model }}">
                                 {% endif %}
                             </figure>
-                            <div class="img-text-overlay">
+                            <div class="{% if object.status == 'SOLD' %}img-text-overlay-back{% else %}img-text-overlay{% endif %}">
+                                {% if object.status == 'SOLD' %}
+                                    <div class="ribbon"><span>VENDIDO</span></div>
+                                {% endif %}
                                 <div class="text">
                                     <h3 class="is-size-4">{{object.model}}</h3>
                                     <p class="">{{object.brand}}</p>
