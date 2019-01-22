@@ -10,10 +10,16 @@
             <div class="car-detail-carousel">
                 <div class="slider-for">
                     <div>
+                        {% if object.status == 'SOLD' %}
+                            <div class="ribbon"><span>VENDIDO</span></div>
+                        {% endif %}
                         <img src="{{object.img.url}}" alt="{{object.model}}">
                     </div>
                     {% for img in img_list %}
                     <div>
+                        {% if object.status == 'SOLD' %}
+                            <div class="ribbon"><span>VENDIDO</span></div>
+                        {% endif %}
                         <img src="{{img.img.url}}" alt="{{object.brand}}">
                     </div>
                     {% endfor %}
