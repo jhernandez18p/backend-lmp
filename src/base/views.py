@@ -163,7 +163,7 @@ class Inventory(ListView):
             pass
         
         
-        return object_list
+        return object_list.order_by('updated')
 
     
     def get_context_data(self, **kwargs):
