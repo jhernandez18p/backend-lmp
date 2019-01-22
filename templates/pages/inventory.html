@@ -32,6 +32,26 @@
                                 </div>
                             </div>
                             <div class="has-background-grey-lighter is-padding-y-10">
+                                <h3 class="is-size-6 is-marginless">Marcas</h3>
+                                <div class="field has-addons has-text-centered">
+                                    <div class="select">
+                                        <form>
+                                            {% csrf_token %}
+                                            <select id="brandSelector">
+                                                {% if brand != '' %}
+                                                <option selected>{{ brand | lower | capfirst}}</option>
+                                                {% else %}
+                                                <option selected>Marcas</option>
+                                                {% endif %}
+                                                {% for obj in brand_list %}
+                                                <option value="{{obj.id}}">{{ obj.name | lower | capfirst }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="has-background-grey-lighter is-padding-y-10">
                                 <h3 class="is-size-6 is-marginless">Precio</h3>
                                 <div class="field has-addons has-text-centered">
                                     <div class="field">
@@ -41,9 +61,9 @@
                                                 <div class="field">
                                                     <p class="control is-expanded has-icons-left">
                                                         {% if price_lower == '' or price_lower == None %}
-                                                            <input class="input" type="text" placeholder="$0,00" id='priceLowerInput'>
+                                                            <input class="input" type="number" placeholder="0,0" id='priceLowerInput'>
                                                         {% else %}
-                                                            <input class="input" type="text" placeholder="${{price_lower|floatformat:2|intcomma}}" value="{{price_lower|floatformat:2|intcomma}}" id='priceLowerInput'>
+                                                            <input class="input" type="number" placeholder="{{price_lower|floatformat:1|intcomma}}" value="{{price_lower|floatformat:1|intcomma}}" id='priceLowerInput'>
                                                         {% endif %}
                                                         <span class="icon is-small is-left">
                                                             <i class="fas fa-dollar-sign"></i>
@@ -53,9 +73,9 @@
                                                 <div class="field">
                                                     <p class="control is-expanded has-icons-left has-icons-right">
                                                         {% if price_higher == '' %}
-                                                        <input class="input" type="email" placeholder="${{price_higher|floatformat:2|intcomma}}" id='priceHigherInput'>
+                                                        <input class="input" type="number" placeholder="{{price_higher|floatformat:1|intcomma}}" id='priceHigherInput'>
                                                         {% else %}
-                                                        <input class="input" type="email" placeholder="${{price_higher|floatformat:2|intcomma}}" value="{{price_higher|floatformat:2|intcomma}}" id='priceHigherInput'>
+                                                        <input class="input" type="number" placeholder="{{price_higher|floatformat:1|intcomma}}" value="{{price_higher|floatformat:1|intcomma}}" id='priceHigherInput'>
                                                         {% endif %}
                                                         <span class="icon is-small is-left">
                                                             <i class="fas fa-dollar-sign"></i>
@@ -77,9 +97,9 @@
                                                 <div class="field">
                                                     <p class="control is-expanded has-icons-left">
                                                         {% if year_lower == '' or year_lower == None %}
-                                                        <input class="input" type="text" placeholder="1920" id="yearLowerInput">
+                                                        <input class="input" type="number" placeholder="1920" id="yearLowerInput">
                                                         {% else %}
-                                                        <input class="input" type="text" placeholder="{{year_lower}}" value="{{year_lower}}" id="yearLowerInput">
+                                                        <input class="input" type="number" placeholder="{{year_lower}}" value="{{year_lower}}" id="yearLowerInput">
                                                         {% endif %}
                                                         <span class="icon is-small is-left">
                                                             <i class="far fa-calendar-alt"></i>
@@ -89,9 +109,9 @@
                                                 <div class="field">
                                                     <p class="control is-expanded has-icons-left has-icons-right">
                                                         {% if year_higher == '' %}
-                                                        <input class="input" type="email" placeholder="{% now 'Y' %}" id="yearHigherInput">
+                                                        <input class="input" type="number" placeholder="{% now 'Y' %}" id="yearHigherInput">
                                                         {% else %}
-                                                        <input class="input" type="email" placeholder="{{year_higher}}" value="{{year_higher}}" id="yearHigherInput">
+                                                        <input class="input" type="number" placeholder="{{year_higher}}" value="{{year_higher}}" id="yearHigherInput">
                                                         {% endif %}
                                                         <span class="icon is-small is-left">
                                                             <i class="far fa-calendar-alt"></i>
@@ -103,30 +123,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="has-background-grey-lighter is-padding-y-10">
-                                <h3 class="is-size-6 is-marginless">Marcas</h3>
-                                <div class="field has-addons has-text-centered">
-                                    <div class="select">
-                                        <form>
-                                            {% csrf_token %}
-                                            <select id="brandSelector">
-                                                {% if brand != '' %}
-                                                <option selected>{{ brand | lower | capfirst}}</option>
-                                                {% else %}
-                                                <option selected>Marcas</option>
-                                                {% endif %}
-                                                {% for obj in brand_list %}
-                                                <option value="{{obj.id}}">{{ obj.name | lower | capfirst }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="has-background-grey-lighter is-padding-y-10 is-padding-x-10">
                                 <a class="button is-normal background-red has-text-white is-fullwidth">Buscar</a>
                             </div>
-
                         </div>
                     </div>
                 </div>

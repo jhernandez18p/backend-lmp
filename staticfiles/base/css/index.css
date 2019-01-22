@@ -7184,3 +7184,18 @@ body {
   }
   html{background-color: #000}
   .is-colored-nav{border-top: 2.3px solid rgb(156, 10, 20);border-bottom: 2.3px solid rgb(156, 10, 20);margin-bottom: 3px;}
+
+  input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

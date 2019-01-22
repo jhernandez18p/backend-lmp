@@ -114,39 +114,54 @@ class Inventory(ListView):
         object_list = self.model.objects.all().filter(status='IN')
 
         price_lower = ''
-        if self.request.GET.get('price_lower'):
+        try:
             price_lower = int(self.request.GET.get('price_lower'))
-            object_list = object_list.filter(price__lte=price_lower)
+            object_list = object_list.filter(price__gte=price_lower)
+        except:
+            pass
         
         price_higher = ''
-        if self.request.GET.get('price_higher'):
+        try:
             price_higher = int(self.request.GET.get('price_higher'))
-            object_list = object_list.filter(price__gte=price_higher)
-
+            object_list = object_list.filter(price__lte=price_higher)
+        except:
+            pass
+        
         year_lower = ''
-        if self.request.GET.get('year_lower'):
-            line = int(self.request.GET.get('year_lower'))
-            object_list = object_list.filter(year__lte=year_lower)
+        try:
+            year_lower = int(self.request.GET.get('year_lower'))
+            object_list = object_list.filter(year__gte=year_lower)
+        except:
+            pass
         
         year_higher = ''
-        if self.request.GET.get('year_higher'):
-            line = int(self.request.GET.get('year_higher'))
-            object_list = object_list.filter(year__gte=year_higher)
-
+        try:
+            year_higher = int(self.request.GET.get('year_higher'))
+            object_list = object_list.filter(year__lte=year_higher)
+        except:
+            pass
+        
         brand = ''
-        if self.request.GET.get('brand'):
+        try:
             brand = int(self.request.GET.get('brand'))
             object_list = object_list.filter(brand=brand)
-
+        except:
+            pass
+        
         model = ''
-        if self.request.GET.get('model'):
+        try:
             model = unquote(self.request.GET.get('model'))
             object_list = object_list.filter(model=model)
-
+        except:
+            pass
+        
         search = ''
-        if self.request.GET.get('search'):
+        try:
             search = self.request.GET.get('search')
             object_list = object_list.filter(Q(brand__name__icontains=search)|Q(model__icontains=search)|Q(description__icontains=search))
+        except:
+            pass
+        
         
         return object_list
 

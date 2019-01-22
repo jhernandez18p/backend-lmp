@@ -100,9 +100,16 @@ def brands(request):
     """
     context = {}
 
+    brand = ''
+    if request.GET.get('brand'):
+        brand = Brand.objects.filter(id=int(request.GET.get('brand')))[0].id
+
     brands = Brand.objects.all()
     if brands.exists():
-        context['brand_list'] = brands
+        if brand != '':
+            context['brand_list'] = brands.exclude(id=brand)
+        else:
+            context['brand_list'] = brands
         context['brand_list_footer'] = brands.order_by('?')[:5]
 
     return context
