@@ -26,7 +26,6 @@ class CarModelAdmin(admin.ModelAdmin):
         'year',
         'sub_type',
         'price',
-        'description',
         'status',
         'views',
     ]
