@@ -123,7 +123,7 @@ class Car(models.Model):
     description = RichTextField(blank=True, verbose_name=_('Descripción'))
     status = models.CharField( max_length=10, choices=CAR_STATUS_CHOICES, default='IN', blank=True, verbose_name=_('Estado de stock'))
     views = models.SmallIntegerField(default=0,blank=True,verbose_name=_('Numero de visitas'))
-    img = models.ImageField( upload_to=get_upload_path, blank=True,default='photos/lmp.jpg', verbose_name=_('Imágen principal'))
+    img = models.ImageField( upload_to=get_upload_path, blank=True,default='lmp.jpg', verbose_name=_('Imágen principal'))
     updated = models.DateTimeField(auto_now=True, auto_now_add=False,verbose_name=_('Ultima actualización'))
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True,verbose_name=_('Fecha de creación'))
 

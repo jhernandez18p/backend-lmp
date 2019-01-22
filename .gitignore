@@ -3,6 +3,7 @@
 
 **/migrations/*
 **/media/*
+!/media/lmp.jpg
 
 **/**/*.*.pyc
 **/**/*.*.pyc
