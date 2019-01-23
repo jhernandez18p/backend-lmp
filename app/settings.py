@@ -38,7 +38,7 @@ if DEBUG:
 
 else:
     # DEBUG = False
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['localhost:*','luxurymotorspanama.com','wwww.luxurymotorspanama.com','159.65.182.100']
     MESSAGE_LEVEL = message_constants.INFO
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
