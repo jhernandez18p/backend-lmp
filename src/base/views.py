@@ -16,7 +16,26 @@ from src.brands.models import Brand
 from src.base.models import Position, Pages, Carousel, CarouselImage
 from src.medias.models import Photo, Video
 
- 
+import threading
+from django.core.mail import EmailMessage
+
+
+class EmailThread(threading.Thread):
+    def __init__(self, subject, html_content, recipient_list, sender):
+        self.subject = subject
+        self.recipient_list = recipient_list
+        self.html_content = html_content
+        self.sender = sender
+        threading.Thread.__init__(self)
+
+    def run(self):
+        msg = EmailMessage(self.subject, self.html_content, self.sender, self.recipient_list)
+        msg.content_subtype = 'html'
+        msg.send()
+
+def send_html_mail(subject, html_content, sender, recipient_list):
+    EmailThread(subject, html_content, recipient_list, sender).start()
+
 class Home(ListView):
     queryset = ''
     template_name = 'pages/home.html'
@@ -348,9 +367,9 @@ def contact(request):
             text_content = 'Contacto página web'
             html_content = body_html
             
-            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-            msg.attach_alternative(html_content, "text/html")
-            msg.send()
+            msg = send_html_mail(subject, html_content, from_email, [to])
+            # msg.attach_alternative(html_content, "text/html")
+            # msg.send()
 
             subject = 'Mensaje enviado'
             from_email = 'luxurymotorsweb@gmail.com'
@@ -358,9 +377,9 @@ def contact(request):
             text_content = 'Contacto página web'
             html_content = 'Gracias %s por contactarnos, en breve nos comunicaremos con ud.' % (name)
             
-            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-            msg.attach_alternative(html_content, "text/html")
-            msg.send()
+            msg = send_html_mail(subject, html_content, from_email, [to])
+            # msg.attach_alternative(html_content, "text/html")
+            # msg.send()
             return render(request, 'pages/contact.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': True})
         
         return render(request, 'pages/contact.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': True})
