@@ -1,10 +1,24 @@
 {% load staticfiles %}
-<script type="text/javascript" src="{% static 'base/js/jquery-1.11.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'base/js/jquery.js' %}"></script>
 <script type="text/javascript" src="{% static 'base/js/jquery-migrate-1.2.1.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'base/js/slick.min.js' %}"></script>
 
 <script type="text/javascript">
 
+    document.onscroll = function() {
+        var navBar = document.getElementById('navBar');
+        var navLogo = document.getElementById('logoSite');
+        if (window.pageYOffset >= 250) {
+            navBar.className='navbar has-background-lmpblack is-colored-nav is-fixed-top';
+            navLogo.className='navbar-item';
+        } else {
+            navBar.className='navbar has-background-lmpblack is-colored-nav';
+            navLogo.className='navbar-item is-hidden-desktop';
+        }
+    }
+
+</script>
+<script type="text/javascript">
 
     $(document).ready(function () {
 
@@ -32,7 +46,6 @@
             fade: true
         });
         
-        // 
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());

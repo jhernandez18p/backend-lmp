@@ -18,11 +18,11 @@
 <div class="has-background-lmpblack has-navbar-fixed-top">
     <nav class="navbar has-background-lmpblack is-colored-nav" id="navBar">
         <div class="container">
-            <div class="navbar-brand is-hidden-desktop">
-                <a class="navbar-item" href="{% url 'front:home' %}">
+            <div class="navbar-brand">
+                <a class="navbar-item is-hidden-desktop" href="{% url 'front:home' %}" id="logoSite">
                     <img src="{% static 'base/images/logo/apple-icon-76x76.png' %}" width="28" height="28">
                 </a>
-                <span class="navbar-burger" id="mainMenu" ref="isBurger" data-target="navMenu">
+                <span class="navbar-burger is-hidden-desktop" id="mainMenu" ref="isBurger" data-target="navMenu">
                     <span></span>
                     <span></span>
                     <span></span>
