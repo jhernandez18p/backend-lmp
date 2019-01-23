@@ -363,7 +363,7 @@ def contact(request):
 
             subject = 'Contacto página web'
             from_email = email
-            to = ['jhernandez.18p@gmail.com']
+            to = ['luxurymotorspanama@gmail.com']
             text_content = 'Contacto página web'
             html_content = body_html
             
