@@ -86,7 +86,7 @@ class CarouselImage(models.Model):
     Carousel = models.ForeignKey(Carousel, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=get_upload_path,verbose_name = _('Imágen'))
     name = models.CharField(max_length=144, blank=True,verbose_name = _('Nombre'))
-    text = RichTextField(blank=True, verbose_name = _('Testo para mostrar sobre la imágen'))
+    text = RichTextField(blank=True, verbose_name = _('Texto para mostrar sobre la imágen'))
     call_to_action_url = models.ForeignKey(
         FlatPage, 
         on_delete=models.CASCADE, 
@@ -254,3 +254,16 @@ class Widget(models.Model):
     class Meta:
         verbose_name = _("Widget")
         verbose_name_plural = _("Widgets")
+
+
+class FAQ(models.Model):
+    question = models.CharField(max_length=144, blank=True,verbose_name = _('Pregunta'))
+    answer = RichTextField(blank=True, verbose_name = _('Respuesta'))
+
+    def __str__(self):
+        return self.question
+
+    class Meta:
+        verbose_name = _("Pregunta frecuente")
+        verbose_name_plural = _("Preguntas frecuentes")
+        ordering = ['question']

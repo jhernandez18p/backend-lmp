@@ -67,9 +67,9 @@
                             <h3 class="is-size-5 has-text-white">Modelo</h3>
                             <p class="has-text-grey-light">{{object.model}}</p>
                             {% endif %}
-                            {% if object.milage %}
-                            <h3 class="is-size-5 has-text-white">Recorrido</h3>
-                            <p class="has-text-grey-light">{{object.milage}}</p>
+                            {% if object.sub_type %}
+                            <h3 class="is-size-5 has-text-white">Tipo de vehículo</h3>
+                            <p class="has-text-grey-light">{{object.sub_type}}</p>
                             {% endif %}
                             {% if object.direction %}
                             <h3 class="is-size-5 has-text-white">Dirección</h3>
@@ -94,6 +94,10 @@
                             {% if object.color %}
                             <h3 class="is-size-5 has-text-white">Color</h3>
                             <p class="has-text-grey-light">{{object.color}}</p>
+                            {% endif %}
+                            {% if object.milage %}
+                            <h3 class="is-size-5 has-text-white">Recorrido</h3>
+                            <p class="has-text-grey-light">{{object.milage}}</p>
                             {% endif %}
                             {% if object.fuel %}
                             <h3 class="is-size-5 has-text-white">Combustible</h3>

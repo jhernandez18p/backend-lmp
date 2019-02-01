@@ -1,5 +1,18 @@
 {% extends 'base/base.html' %}{% load staticfiles %}
 
+{% block css %}
+<style>
+    .slide-description{    
+        position: absolute;
+        bottom: 15px;
+        width: 100%;
+        background: rgba(0,0,0,0.2);
+        padding: 15px 20px;
+        color: #f4f4f4;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
@@ -13,9 +26,9 @@
                     <div class="img-text-overlay-active">
                         <div class="text">
                             <h3 class="is-size-2 is-size-5-touch">{{ SITE_TITLE | safe }}</h3>
-                            <p class="is-size-5 is-size-7-touch has-text-grey-light">
+                            <div class="is-size-4 is-size-6-touch has-text-light">
                                 {{ SITE_DESCRIPTION | safe}}
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -35,6 +48,10 @@
         {% for object in carousel_image_list %}
             <div>
                 <img src="{{object.image.url}}" alt="Carousel home {{object.id}}">
+                <div class="slide-description">
+                    <h2 class="is-size-4">{{object.name}}</h2>
+                    <div class="is-size-6">{{object.text | safe}}</div>
+                </div>
             </div>
         {% endfor %}
         </div>

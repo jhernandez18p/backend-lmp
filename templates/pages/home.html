@@ -1,7 +1,14 @@
 {% extends 'base/base.html' %}{% load staticfiles %}
 
+{% block css %}
+<style>
+    #siteHeaderCarousel .slick-next{ right: 25px !important; z-index: 9;}
+    #siteHeaderCarousel .slick-prev{ left: 25px !important; z-index: 9;}
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="columns">
         {% if brand_list %}
         <div class="column is-10 is-offset-1">
@@ -28,6 +35,8 @@
         </div>
     </div>
     {% endif %}
+</div>
+<div class="container">
     <div class="is-latest-inventory">
         <div class="hero">
             <div class="hero-body">
@@ -81,11 +90,30 @@
     </div>
     <div class="columns">
         <div class="column">
-            <a href="{% url 'front:contact-trade-in' %}?next={{request.path}}">
-                <figure class="image is-3by1">
-                    <img src="{{ SITE_TRADEIN_IMG }}" alt="Banner">
-                </figure>
-            </a>
+            <div>
+                <a href="{% url 'front:contact-trade-in' %}?next={{request.path}}">
+                    <div class="img-container is-radius is-inventory">
+                        <figure class="image is-3by1">
+                            <img src="{{ SITE_TRADEIN_IMG }}" alt="Banner">
+                        </figure>
+                        <div class="img-text-overlay-back">
+                            <div class="text">
+                                <div class="content">
+                                    <h5 class="is-size-4 has-text-light">Requisitos</h5>
+                                    <ol class="is-upper-roman has-text-left is-size-6 has-text-light">
+                                        <li>Traer Registro único vehicular (copia /original).</li>
+                                        <li>Traer el vehículo.</li>
+                                        <li>Llenar formulario de Consignación  en la empresa al momento de dejar el vehículo.</li>
+                                    </ol>
+                                    <a class="button is-text is-inverted" href="{% url 'front:contact-trade-in' %}?next={{request.path}}">
+                                        Haga clic aqui para solicitar una cita
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

@@ -30,10 +30,11 @@
             </div>
             <div id="navMenu" class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item has-text-white is-uppercase {% if menu == 'home' %}is-navbar-active-home{% endif %}" aria-current="page" data-target="navMenu" href="{% url 'front:home' %}">Inicio</a>
-                    <a class="navbar-item has-text-white is-uppercase {% if menu == 'about' %}is-navbar-active-home{% endif %}" data-target="navMenu" href="{% url 'front:about' %}">¿Quienes somos?</a>
-                    <a class="navbar-item has-text-white is-uppercase {% if menu == 'inventory' %}is-navbar-active-home{% endif %}" data-target="navMenu" href="{% url 'front:inventory' %}">Inventario</a>
-                    <a class="navbar-item has-text-white is-uppercase {% if menu == 'contact' %}is-navbar-active-home{% endif %}" data-target="navMenu" id="contactLink">Contacto</a>
+                    <a class="navbar-item has-text-white is-uppercase {% if menu == 'home' %}is-navbar-active-home{% else %}has-text-weight-light{% endif %}" aria-current="page" data-target="navMenu" href="{% url 'front:home' %}">Inicio</a>
+                    <a class="navbar-item has-text-white is-uppercase {% if menu == 'about' %}is-navbar-active-home{% else %}has-text-weight-light{% endif %}" data-target="navMenu" href="{% url 'front:about' %}">¿Quienes somos?</a>
+                    <a class="navbar-item has-text-white is-uppercase {% if menu == 'inventory' %}is-navbar-active-home{% else %}has-text-weight-light{% endif %}" data-target="navMenu" href="{% url 'front:inventory' %}">Inventario</a>
+                    <a class="navbar-item has-text-white is-uppercase {% if menu == 'contact' %}is-navbar-active-home{% else %}has-text-weight-light{% endif %}" data-target="navMenu" id="contactLink">Contacto</a>
+                    <a class="navbar-item has-text-white is-uppercase is-navbar-active-home has-text-weight-light" data-target="navMenu" href="{% url 'front:sell' %}?next={{request.path}}">Venda su auto</a>
                 </div>
             </div>
         </div>

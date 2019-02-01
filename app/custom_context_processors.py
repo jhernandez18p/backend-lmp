@@ -102,7 +102,11 @@ def brands(request):
 
     brand = ''
     if request.GET.get('brand'):
-        brand = Brand.objects.filter(id=int(request.GET.get('brand')))[0].id
+        try:
+            brand = Brand.objects.filter(id=int(request.GET.get('brand')))[0].id
+        except:
+            brand = Brand.objects.filter(name=request.GET.get('brand'))[0].id
+
 
     brands = Brand.objects.all()
     if brands.exists():

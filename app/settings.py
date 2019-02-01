@@ -79,9 +79,9 @@ THIRD_PARTY_APPS = [
     'corsheaders',
     'django_filters',
     'import_export',
-    'rest_framework.authtoken',
+    # 'rest_framework.authtoken',
     'rest_framework',
-    'social_django',
+    # 'social_django',
     'widget_tweaks',
 ]
 

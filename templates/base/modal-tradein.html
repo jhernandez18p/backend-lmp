@@ -10,12 +10,13 @@
 <div class="modal-content is-padding-30 is-paddingless-top">
     <div class="modal-card-head">
         <h3 class="has-text-black is-centered is-size-3">
-            Cotizar <span class="is-padding-y-10" id="modelCar"> {{brand}} {{model}}</span>
+            Trade-in
         </h3>
     </div>
     <form method="post" enctype="multipart/form-data" action="{% url 'front:contact' %}">
         <div class="modal-card-body">
             {% csrf_token %}
+            <input class="input" type="hidden" name="title" value="Trade-in" >
             <input class="input" type="hidden" name="brand" value="{{brand}}" >
             <input class="input" type="hidden" name="model" value="{{model}}" >
             <div class="field is-horizontal">
@@ -56,6 +57,14 @@
                 </div>
             </div>
             <div class="field is-horizontal">
+                <div class="field-label is-normal"><label class="label">Día de preferencia</label></div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control"><input class="input" type="text" placeholder="MM/DD/YYYY" name="date"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
                 <div class="field-label is-normal"><label class="label">Comentarios</label></div>
                 <div class="field-body">
                     <div class="field">
@@ -67,7 +76,7 @@
             </div>
         </div>
         <div class="modal-card-foot">
-            <button class="button background-red has-text-light is-fullwidth">Enviar Cotización</button>
+            <button class="button background-red has-text-light is-fullwidth">Enviar Solicitud</button>
         </div>
     </form>
 </div>

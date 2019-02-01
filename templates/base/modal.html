@@ -16,6 +16,7 @@
     <form method="post" enctype="multipart/form-data" action="{% url 'front:contact' %}">
         <div class="modal-card-body">
             {% csrf_token %}
+            <input class="input" type="hidden" name="title" value="Contacto" >
             <input class="input" type="hidden" name="brand" value="{{brand}}" >
             <input class="input" type="hidden" name="model" value="{{model}}" >
             <div class="field is-horizontal">
@@ -67,7 +68,7 @@
             </div>
         </div>
         <div class="modal-card-foot">
-            <button class="button is-primary is-fullwidth">Enviar Cotización</button>
+            <button class="button background-red has-text-light is-fullwidth">Enviar Cotización</button>
         </div>
     </form>
 </div>

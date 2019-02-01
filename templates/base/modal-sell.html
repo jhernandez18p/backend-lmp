@@ -1,0 +1,196 @@
+{% extends 'base/base.html' %}{% load staticfiles %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="columns">
+        <div class="column">
+            <h3 class="has-text-light is-centered is-size-3">
+                Venda su auto con nosotros
+            </h3>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-8 is-offset-2">
+            <form method="post" enctype="multipart/form-data" action="{% url 'front:contact' %}">
+                <div class="modal-card-body">
+                    <div>
+                        <p>Dejar su auto en consignación no tiene costo. Se pacta un porcentaje mínimo sobre el valor de venta del vehículo.</p>
+                        <br>
+                        <p>Por favor rellene el formulario a continuación con sus datos, para contactarle e iniciar el proceso de venta.</p>
+                    </div>
+                    <hr>
+                    <h3 class="has-text-black is-centered is-size-4 is-margin-bottom-20">Formulario</h3>
+                    {% csrf_token %}
+                    <input class="input" type="hidden" name="title" value="Venda su auto" >
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Nombre Completo</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control"><input class="input" type="text" placeholder="John Doe" name="name" required></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Email</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control"><input class="input" type="text" placeholder="johndoe@email.com" name="email" required></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Número de teléfono</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control"><input class="input" type="text" placeholder="+507 0000 0000" name="phone" required></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Cedula o Pasaporte</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control"><input class="input" type="text" placeholder="" name="id" required></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Lugar de trabajo</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control"><input class="input" type="text" placeholder="" name="work-place" required></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Dirección residencial</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control"><input class="input" type="text" placeholder="" name="dir"></div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Marca</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control"><input class="input" type="text" placeholder="" name="brand" required></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Modelo</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control"><input class="input" type="text" placeholder="" name="model" required></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Año</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control"><input class="input" type="text" placeholder="" name="year" required></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Color</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control"><input class="input" type="text" placeholder="" name="color" required></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Kilometraje</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control"><input class="input" type="text" placeholder="" name="millaje" required></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Precio Requerido (precio de venta)</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control"><input class="input" type="text" placeholder="" name="price" required></div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="field is-horizontal">
+                        <div class="field-label">
+                            <label class="label">¿Cómo prefiere ser contactado?</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field is-narrow">
+                                <div class="control">
+                                    <label class="radio"><input type="radio" name="contact">Email</label>
+                                    <label class="radio"><input type="radio" name="contact">teléfono</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="file is-horizontal is-margin-bottom-20">
+                        <div class="field-label is-normal"><label class="label">Fotos frontal</label></div>
+                        <div class="field-body">
+                            <input type="file" name="pic1" required>
+                        </div>
+                    </div>
+                    <div class="file is-horizontal is-margin-bottom-20">
+                        <div class="field-label is-normal"><label class="label">Fotos Lateral izquierdo</label></div>
+                        <div class="field-body">
+                            <input type="file" name="pic2" required>
+                        </div>
+                    </div>
+                    <div class="file is-horizontal is-margin-bottom-20">
+                        <div class="field-label is-normal"><label class="label">Fotos Lateral derecho</label></div>
+                        <div class="field-body">
+                            <input type="file" name="pic3" required>
+                        </div>
+                    </div>
+                    <div class="file is-horizontal is-margin-bottom-20">
+                        <div class="field-label is-normal"><label class="label">Fotos Trasera</label></div>
+                        <div class="field-body">
+                            <input type="file" name="pic4" required>
+                        </div>
+                    </div>
+                    <div class="file is-horizontal is-margin-bottom-20">
+                        <div class="field-label is-normal"><label class="label">Fotos Interior</label></div>
+                        <div class="field-body">
+                            <input type="file" name="pic5" required>
+                        </div>
+                    </div>
+        
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal"><label class="label">Comentarios</label></div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control">
+                                    <textarea class="textarea" placeholder="¿Comó te podemos ayudar?" name="message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-card-foot">
+                    <button class="button background-red has-text-light is-fullwidth">Enviar solicitud</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

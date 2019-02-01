@@ -1,3 +1,4 @@
+import threading
 from urllib.parse import unquote
 
 from django.contrib.sessions.backends.db import SessionStore
@@ -13,28 +14,49 @@ from django.views.generic.edit import CreateView
 
 from src.cars.models import Car
 from src.brands.models import Brand
-from src.base.models import Position, Pages, Carousel, CarouselImage
+from src.base.models import Position, Pages, Carousel, CarouselImage, FAQ
 from src.medias.models import Photo, Video
 
-import threading
+from decouple import config
 from django.core.mail import EmailMessage
 
 
 class EmailThread(threading.Thread):
-    def __init__(self, subject, html_content, recipient_list, sender):
+    def __init__(self, subject, html_content, recipient_list, sender, uploaded_file, uploaded_file2, uploaded_file3, uploaded_file4, uploaded_file5):
         self.subject = subject
         self.recipient_list = recipient_list
         self.html_content = html_content
         self.sender = sender
+        self.uploaded_file = uploaded_file
+        self.uploaded_file2 = uploaded_file2
+        self.uploaded_file3 = uploaded_file3
+        self.uploaded_file4 = uploaded_file4
+        self.uploaded_file5 = uploaded_file5
+        
         threading.Thread.__init__(self)
 
     def run(self):
         msg = EmailMessage(self.subject, self.html_content, self.sender, self.recipient_list)
         msg.content_subtype = 'html'
+        if self.uploaded_file != '':
+            msg.attach(self.uploaded_file.name, self.uploaded_file.read(), self.uploaded_file.content_type)
+        
+        if self.uploaded_file2 != '':
+            msg.attach(self.uploaded_file2.name, self.uploaded_file2.read(), self.uploaded_file2.content_type)
+        
+        if self.uploaded_file3 != '':
+            msg.attach(self.uploaded_file3.name, self.uploaded_file3.read(), self.uploaded_file3.content_type)
+        
+        if self.uploaded_file4 != '':
+            msg.attach(self.uploaded_file4.name, self.uploaded_file4.read(), self.uploaded_file4.content_type)
+        
+        if self.uploaded_file5 != '':
+            msg.attach(self.uploaded_file5.name, self.uploaded_file5.read(), self.uploaded_file5.content_type)
+        
         msg.send()
 
-def send_html_mail(subject, html_content, sender, recipient_list):
-    EmailThread(subject, html_content, recipient_list, sender).start()
+def send_html_mail(subject, html_content, sender, recipient_list, uploaded_file = '', uploaded_file2 = '', uploaded_file3 = '', uploaded_file4 = '', uploaded_file5 = '' ):
+    EmailThread(subject, html_content, recipient_list, sender, uploaded_file, uploaded_file2, uploaded_file3, uploaded_file4, uploaded_file5).start()
 
 class Home(ListView):
     queryset = ''
@@ -290,6 +312,12 @@ class CarDetail(DetailView):
         return context
 
 
+class FAQ(ListView):
+    template_name = 'pages/detail/faq.html'
+    model = FAQ
+    paginate_by = 5
+    # return render(request, , {'title': 'Contacto', 'menu':'contact','has_newsletter': False})
+
 
 def contact(request):
     if request.method == 'POST':
@@ -328,16 +356,100 @@ def contact(request):
         else:
             message = ''
 
+        try:
+            pic1 = request.FILES['pic1']
+        except:
+            pic1 = ''
+        
+        try:
+            pic2 = request.FILES['pic2']
+        except:
+            pic2 = ''
+        
+        try:
+            pic3 = request.FILES['pic3']
+        except:
+            pic3 = ''
+        
+        try:
+            pic4 = request.FILES['pic4']
+        except:
+            pic4 = ''
+        
+        try:
+            pic5 = request.FILES['pic5']
+        except:
+            pic5 = ''
+        
+        if request.POST.get('price'):
+            price = request.POST.get('price')
+        else:
+            price = ''
+        
+        if request.POST.get('color'):
+            color = request.POST.get('color')
+        else:
+            color = ''
+        
+        if request.POST.get('millaje'):
+            millaje = request.POST.get('millaje')
+        else:
+            millaje = ''
+        
+        if request.POST.get('year'):
+            year = request.POST.get('year')
+        else:
+            year = ''
+        
+        if request.POST.get('dir'):
+            _dir = request.POST.get('dir')
+        else:
+            _dir = ''
+
+        if request.POST.get('work-place'):
+            _work = request.POST.get('work-place')
+        else:
+            _work = ''
+
+        if request.POST.get('date'):
+            _date = request.POST.get('date')
+        else:
+            _date = ''
+
+        if request.POST.get('id'):
+            _id = request.POST.get('id')
+        else:
+            _id = ''
+
+
+
         if email == '' or name == '':
             return render(request, 'pages/contact.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': True})
         else:
             has_car = ''
-            if model != '' and brand != '':
+            if model != '' and brand != '' and _dir == '':
                 model_html = '<p>Modelo: %s</p>' % (model)
 
                 brand_html = '<p>Marca: %s</p>' % (brand)
 
                 has_car = '<p>Se encuentra interesado en el vehiculo</p>\n%s \n%s' % (model_html, brand_html)
+            
+            elif model != '' and brand != '' and _dir != '':
+                has_car = """
+                    <p>Lugar de trabajo: %s</p>
+                    <p>Dirección residencial: %s</p>
+                    <p>Cedula o pasaporte: %s</p>
+                    <p>Datos del auto</p>
+                    <p>Marca: %s</p>
+                    <p>Modelo: %s</p>
+                    <p>Año: %s</p>
+                    <p>Color: %s</p>
+                    <p>Kilometraje: %s</p>
+                    <p>Precio Requerido: %s</p>
+                """ % (_work, _dir, _id, brand, model, year, color, millaje, price)
+            
+            elif _date != '':
+                has_car = '<p>Cita para Trade-in</p><p>Fecha: %s</p>' % (_date)
             
             body_html = """
             <!DOCTYPE html>
@@ -363,11 +475,11 @@ def contact(request):
 
             subject = 'Contacto página web'
             from_email = email
-            to = ['luxurymotorspanama@gmail.com']
+            to = [config('EMAIL_CONTACT'),]
             text_content = 'Contacto página web'
             html_content = body_html
             
-            msg = send_html_mail(subject, html_content, from_email, [to])
+            msg = send_html_mail(subject, html_content, from_email, [to], pic1, pic2, pic3, pic4, pic5)
             # msg.attach_alternative(html_content, "text/html")
             # msg.send()
 
@@ -380,7 +492,7 @@ def contact(request):
             msg = send_html_mail(subject, html_content, from_email, [to])
             # msg.attach_alternative(html_content, "text/html")
             # msg.send()
-            return render(request, 'pages/contact.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': True})
+            return render(request, 'pages/thanks.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': True})
         
         return render(request, 'pages/contact.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': True})
     
@@ -389,7 +501,6 @@ def contact(request):
     
     return render(request, 'pages/contact.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': True})
     
-
 def quotations(request):
     if request.GET.get('model'):
         model = request.GET.get('model')
@@ -409,14 +520,17 @@ def quotations(request):
         'brand': brand,
     })
 
-def faq(request):
-    return render(request, 'pages/detail/faq.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': False})
+def contact_response(request):
+    return render(request, 'base/modal.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': False})
 
 def booking(request):
     return render(request, 'base/modal.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': False})
 
 def trade_in(request):
-    return render(request, 'base/modal.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': False})
+    return render(request, 'base/modal-tradein.html', {'title': 'Trade-In', 'menu':'trade-in','has_newsletter': False})
+
+def sell(request):
+    return render(request, 'base/modal-sell.html', {'title': 'Sell', 'menu':'sell','has_newsletter': False})
 
 
 ''' 

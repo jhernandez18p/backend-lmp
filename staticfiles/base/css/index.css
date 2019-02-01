@@ -3417,7 +3417,7 @@ a.box:active {
   .field-body {
     display: flex;
     flex-basis: 0;
-    flex-grow: 5;
+    flex-grow: 2;
     flex-shrink: 1;
   }
 
