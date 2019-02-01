@@ -138,7 +138,7 @@ class Car(models.Model):
         self.save()
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-created_at','views']
         verbose_name = _('Carro')
         verbose_name_plural = _('Carros')
 
