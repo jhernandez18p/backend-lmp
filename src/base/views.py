@@ -426,6 +426,7 @@ def contact(request):
         if email == '' or name == '':
             return render(request, 'pages/contact.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': True})
         else:
+
             has_car = ''
             if model != '' and brand != '' and _dir == '':
                 model_html = '<p>Modelo: %s</p>' % (model)
@@ -451,48 +452,61 @@ def contact(request):
             elif _date != '':
                 has_car = '<p>Cita para Trade-in</p><p>Fecha: %s</p>' % (_date)
             
-            body_html = """
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                <title>Document</title>
-            </head>
-            <body>
-                <h3>Contacto desde la pagina web Luxury Motors Panamá</h3>
-                <p>%s ha intentado comunicarse</p>
-                <p>Por favor contacatar al:</p>
-                <p>Email:%s</p>
-                <p>Telefono:%s</p>
-                %s
-                <p>Nos ha dejado el siguente comentario: </p>
-                <p>%s</p>
-            </body>
-            </html>
-            """ % (name, email, phone, has_car, message)
+            ''' Begin reCAPTCHA validation '''
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            ''' End reCAPTCHA validation '''
+            if result['success']:
+                body_html = """
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                    <title>Document</title>
+                </head>
+                <body>
+                    <h3>Contacto desde la pagina web Luxury Motors Panamá</h3>
+                    <p>%s ha intentado comunicarse</p>
+                    <p>Por favor contacatar al:</p>
+                    <p>Email:%s</p>
+                    <p>Telefono:%s</p>
+                    %s
+                    <p>Nos ha dejado el siguente comentario: </p>
+                    <p>%s</p>
+                </body>
+                </html>
+                """ % (name, email, phone, has_car, message)
 
-            subject = 'Contacto página web'
-            from_email = email
-            to = [config('EMAIL_CONTACT'),]
-            text_content = 'Contacto página web'
-            html_content = body_html
-            
-            msg = send_html_mail(subject, html_content, from_email, [to], pic1, pic2, pic3, pic4, pic5)
-            # msg.attach_alternative(html_content, "text/html")
-            # msg.send()
+                subject = 'Contacto página web'
+                from_email = email
+                to = [config('EMAIL_CONTACT'),]
+                text_content = 'Contacto página web'
+                html_content = body_html
+                
+                msg = send_html_mail(subject, html_content, from_email, [to], pic1, pic2, pic3, pic4, pic5)
+                # msg.attach_alternative(html_content, "text/html")
+                # msg.send()
 
-            subject = 'Mensaje enviado'
-            from_email = 'luxurymotorsweb@gmail.com'
-            to = [email]
-            text_content = 'Contacto página web'
-            html_content = 'Gracias %s por contactarnos, en breve nos comunicaremos con ud.' % (name)
-            
-            msg = send_html_mail(subject, html_content, from_email, [to])
-            # msg.attach_alternative(html_content, "text/html")
-            # msg.send()
-            return render(request, 'pages/thanks.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': True})
+                subject = 'Mensaje enviado'
+                from_email = 'luxurymotorsweb@gmail.com'
+                to = [email]
+                text_content = 'Contacto página web'
+                html_content = 'Gracias %s por contactarnos, en breve nos comunicaremos con ud.' % (name)
+                
+                msg = send_html_mail(subject, html_content, from_email, [to])
+                # msg.attach_alternative(html_content, "text/html")
+                # msg.send()
+                return render(request, 'pages/thanks.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': True})
         
         return render(request, 'pages/contact.html', {'title': 'Contacto', 'menu':'contact','has_newsletter': True})
     
