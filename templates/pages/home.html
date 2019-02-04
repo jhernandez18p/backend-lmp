@@ -91,7 +91,7 @@
     <div class="columns">
         <div class="column">
             <div>
-                <a href="{% url 'front:contact-trade-in' %}?next={{request.path}}">
+                <a href="{% url 'front:sell' %}?next={{request.path}}">
                     <div class="img-container is-radius is-inventory">
                         <figure class="image is-3by1">
                             <img src="{{ SITE_TRADEIN_IMG }}" alt="Banner">
@@ -105,7 +105,7 @@
                                         <li>Traer el vehículo.</li>
                                         <li>Llenar formulario de Consignación  en la empresa al momento de dejar el vehículo.</li>
                                     </ol>
-                                    <a class="button is-text is-inverted" href="{% url 'front:contact-trade-in' %}?next={{request.path}}">
+                                    <a class="button is-text is-inverted" href="{% url 'front:sell' %}?next={{request.path}}">
                                         Haga clic aqui para solicitar una cita
                                     </a>
                                 </div>

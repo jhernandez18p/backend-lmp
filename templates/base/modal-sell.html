@@ -19,12 +19,19 @@
             <form method="post" enctype="multipart/form-data" action="{% url 'front:contact' %}">
                 <div class="modal-card-body">
                     <div>
-                        <p>Dejar su auto en consignación no tiene costo. Se pacta un porcentaje mínimo sobre el valor de venta del vehículo.</p>
-                        <br>
-                        <p>Por favor rellene el formulario a continuación con sus datos, para contactarle e iniciar el proceso de venta.</p>
+                        <div class="content">
+                            <h5 class="is-size-4">Requisitos</h5>
+                            <ol class="is-upper-roman has-text-left is-size-6 ">
+                                <li>Traer Registro único vehicular (copia /original).</li>
+                                <li>Traer el vehículo.</li>
+                                <li>Llenar formulario de Consignación  en la empresa al momento de dejar el vehículo.</li>
+                                <li>Dejar su auto en consignación no tiene costo. Se pacta un porcentaje mínimo sobre el valor de venta del vehículo.</li>
+                            </ol>
+                            <p>Por favor rellene el formulario a continuación con sus datos, para contactarle e iniciar el proceso de venta.</p>
+                            <hr>
+                            <h3 class="has-text-black is-centered is-size-4 is-margin-bottom-20">Formulario</h3>
+                        </div>
                     </div>
-                    <hr>
-                    <h3 class="has-text-black is-centered is-size-4 is-margin-bottom-20">Formulario</h3>
                     {% csrf_token %}
                     <input class="input" type="hidden" name="title" value="Venda su auto" >
                     <div class="field is-horizontal">
