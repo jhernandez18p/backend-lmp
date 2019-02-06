@@ -2,6 +2,15 @@
 
 {% block content %}
 <div class="container">
-    <h2>{{error}}</h2>
-</div>
+        <div class="columns">
+            <div class="column">
+                <h3 class="has-text-light is-centered is-size-3">
+                    Lo sentimos, se ha producido un error.
+                </h3>
+                <p class="has-text-light is-centered is-size-5">
+                    {{error}} - Página no encontrada
+                </p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
